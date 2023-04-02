@@ -21,6 +21,7 @@
 		"eslint": "^8.37.0",
 		"eslint-plugin-astro": "^0.26.1",
 		"eslint-plugin-jsx-a11y": "^6.7.1",
+		"eslint-plugin-simple-import-sort": "^10.0.0",
 		"eslint-plugin-solid": "^0.12.0",
 		"typescript": "^5.0.3"
 	}

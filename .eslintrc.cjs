@@ -4,7 +4,13 @@ module.exports = {
 		project: true,
 		tsconfigRootDir: __dirname,
 	},
-	plugins: ["@typescript-eslint", "astro", "jsx-a11y", "solid"],
+	plugins: [
+		"@typescript-eslint",
+		"astro",
+		"jsx-a11y",
+		"solid",
+		"simple-import-sort",
+	],
 	root: true,
 	overrides: [
 		{
@@ -30,5 +36,7 @@ module.exports = {
 	],
 	rules: {
 		"no-undef": "off",
+		"simple-import-sort/imports": "error",
+		"simple-import-sort/exports": "error",
 	},
 };

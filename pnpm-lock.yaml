@@ -8,6 +8,7 @@ specifiers:
   eslint: ^8.37.0
   eslint-plugin-astro: ^0.26.1
   eslint-plugin-jsx-a11y: ^6.7.1
+  eslint-plugin-simple-import-sort: ^10.0.0
   eslint-plugin-solid: ^0.12.0
   solid-js: ^1.4.3
   typescript: ^5.0.3
@@ -23,6 +24,7 @@ devDependencies:
   eslint: 8.37.0
   eslint-plugin-astro: 0.26.1_eslint@8.37.0
   eslint-plugin-jsx-a11y: 6.7.1_eslint@8.37.0
+  eslint-plugin-simple-import-sort: 10.0.0_eslint@8.37.0
   eslint-plugin-solid: 0.12.0_vwh6htx42aidho2qgfca5u5rwm
   typescript: 5.0.3
 
@@ -1746,6 +1748,14 @@ packages:
       object.entries: 1.1.6
       object.fromentries: 2.0.6
       semver: 6.3.0
+    dev: true
+
+  /eslint-plugin-simple-import-sort/10.0.0_eslint@8.37.0:
+    resolution: {integrity: sha512-AeTvO9UCMSNzIHRkg8S6c3RPy5YEwKWSQPx3DYghLedo2ZQxowPFLGDN1AZ2evfg6r6mjBSZSLxLFsWSu3acsw==}
+    peerDependencies:
+      eslint: '>=5.0.0'
+    dependencies:
+      eslint: 8.37.0
     dev: true
 
   /eslint-plugin-solid/0.12.0_vwh6htx42aidho2qgfca5u5rwm:
