@@ -9,6 +9,8 @@ jobs:
 name: Lint
 
 on:
+  pull_request: ~
+
   push:
     branches:
       - main
