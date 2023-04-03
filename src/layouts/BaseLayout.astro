@@ -1,12 +1,20 @@
 ---
 import "../../public/global.css";
 import ThemeToggle from "../components/ThemeToggle";
+
+import type { MarkdownLayoutProps } from "astro";
+
+type Props = MarkdownLayoutProps<{
+	title: string;
+}>;
+
+const { frontmatter } = Astro.props;
 ---
 
 <html>
+	<title>{frontmatter.title}</title>
 	<body>
 		<ThemeToggle client:load />
-		<!-- <script src="../webcontainer.ts"></script> -->
 		<slot />
 		<script is:inline>
 			const theme = (() => {
@@ -25,6 +33,5 @@ import ThemeToggle from "../components/ThemeToggle";
 			document.documentElement.setAttribute("data-theme", theme);
 			window.localStorage.setItem("theme", theme);
 		</script>
-		<slot />
 	</body>
 </html>
