@@ -36,7 +36,5 @@ module.exports = {
 	],
 	rules: {
 		"no-undef": "off",
-		"simple-import-sort/imports": "error",
-		"simple-import-sort/exports": "error",
 	},
 };
