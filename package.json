@@ -12,10 +12,13 @@
 	},
 	"dependencies": {
 		"@astrojs/solid-js": "^2.1.0",
+		"@solid-primitives/mutation-observer": "^1.1.10",
 		"astro": "^2.1.9",
-		"solid-js": "^1.4.3"
+		"solid-js": "^1.4.3",
+		"unplugin-icons": "^0.16.1"
 	},
 	"devDependencies": {
+		"@iconify/json": "^2.2.43",
 		"@typescript-eslint/eslint-plugin": "^5.57.0",
 		"@typescript-eslint/parser": "^5.57.0",
 		"eslint": "^8.37.0",

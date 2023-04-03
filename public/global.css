@@ -1,0 +1,159 @@
+/*
+  Josh's Custom CSS Reset
+  https://www.joshwcomeau.com/css/custom-css-reset/
+*/
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+* {
+	margin: 0;
+}
+html,
+body {
+	height: 100%;
+}
+body {
+	line-height: 1.5;
+	-webkit-font-smoothing: antialiased;
+}
+img,
+picture,
+video,
+canvas,
+svg {
+	display: block;
+	max-width: 100%;
+}
+input,
+button,
+textarea,
+select {
+	font: inherit;
+}
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	overflow-wrap: break-word;
+}
+#root,
+#__next {
+	isolation: isolate;
+}
+
+@font-face {
+  font-family: 'Gordita';
+  src: url('./fonts/Gordita/Gordita-Regular.eot?#iefix') format('embedded-opentype'),
+    url('./fonts/Gordita/Gordita-Regular.woff') format('woff'),
+    url('./fonts/Gordita/Gordita-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: 'Gordita';
+  src: url('./fonts/Gordita/Gordita-Thin.eot?#iefix') format('embedded-opentype'),
+    url('./fonts/Gordita/Gordita-Thin.woff') format('woff'),
+    url('./fonts/Gordita/Gordita-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: 'Gordita';
+  src: url('./fonts/Gordita/Gordita-Medium.eot?#iefix') format('embedded-opentype'),
+    url('./fonts/Gordita/Gordita-Medium.woff') format('woff'),
+    url('./fonts/Gordita/Gordita-Medium.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: 'Gordita';
+  src: url('./fonts/Gordita/Gordita-Bold.eot?#iefix') format('embedded-opentype'),
+    url('./fonts/Gordita/Gordita-Bold.woff') format('woff'),
+    url('./fonts/Gordita/Gordita-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: fallback;
+}
+
+:root {
+	--black: #333;
+	--white: #fff;
+	--lightgray: #f3f5f7;
+	--solidblue: #2c4f7c;
+	--darkdefault: #b8d7ff;
+	--primary: #4483c1;
+
+	/* Tailwind Colors */
+	--gray-3: #d1d5db;
+	--gray-4: #9ca3af
+	--slate-1: #F1F5F9;
+	--slate-3: #D1D5DB;
+
+	--text-base: var(--black)
+	--bg-base: var(--lightgray);
+	--text-headings: var(--solidblue);
+
+	--spacing-0-5: 0.125rem;
+	--spacing-1: 0.25rem;
+	--spacing-1-5: 0.375rem;
+	--spacing-2: 0.5rem;
+	--spacing-2-5: 0.625rem;
+	--spacing-3: 0.75rem;
+	--spacing-3-5: 0.875rem;
+	--spacing-4: 1rem;
+	--spacing-5: 1.25rem;
+	--spacing-6: 1.5rem;
+	--spacing-7: 1.75rem;
+	--spacing-8: 2rem;
+	--spacing-9: 2.25rem;
+	--spacing-10: 2.5rem;
+	--spacing-11: 2.75rem;
+	--spacing-12: 3rem;
+	--spacing-14: 3.5rem;
+	--spacing-16: 4rem;
+	--spacing-20: 5rem;
+	--spacing-24: 6rem;
+	--spacing-28: 7rem;
+	--spacing-32: 8rem;
+	--spacing-36: 9rem;
+	--spacing-40: 10rem;
+	--spacing-44: 11rem;
+	--spacing-48: 12rem;
+	--spacing-52: 13rem;
+	--spacing-56: 14rem;
+	--spacing-60: 15rem;
+	--spacing-64: 16rem;
+	--spacing-72: 18rem;
+	--spacing-80: 20rem;
+	--spacing-96: 24rem;
+
+	--text-xs: 0.75rem;
+	--text-sm: 0.875rem;
+	--text-base: 1rem;
+	--text-lg:: 1.125rem;
+	--text-xl: 1.25rem;
+	--text-2xl: 1.5rem;
+	--text-3xl: 2.25rem;
+	--text-4xl: 2.5rem;
+	--text-5xl: 3rem;
+	--text-6xl: 3.75rem;
+	--text-7xl: 4.5rem;
+	--text-8xl: 6rem;
+	--text-9xl: 8rem;
+}
+
+:root[data-theme='dark'] {
+	--text-base: var(--white);
+	--bg-base: var(--black);
+	--text-headings: var(--darkdefault);
+}
