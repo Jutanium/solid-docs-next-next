@@ -7,18 +7,22 @@
 *::after {
 	box-sizing: border-box;
 }
+
 * {
 	margin: 0;
 }
+
 html,
 body {
 	font-family: Gordita, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";;
 	height: 100%;
 }
+
 body {
 	line-height: 1.5;
 	-webkit-font-smoothing: antialiased;
 }
+
 img,
 picture,
 video,
@@ -27,12 +31,14 @@ svg {
 	display: block;
 	max-width: 100%;
 }
+
 input,
 button,
 textarea,
 select {
 	font: inherit;
 }
+
 p,
 h1,
 h2,
@@ -42,6 +48,7 @@ h5,
 h6 {
 	overflow-wrap: break-word;
 }
+
 #root,
 #__next {
 	isolation: isolate;
@@ -49,18 +56,18 @@ h6 {
 
 @font-face {
   font-family: 'Gordita';
-  src: url('./public/fonts/Gordita/Gordita-Regular.eot?#iefix') format('embedded-opentype'),
-    url('./public/fonts/Gordita/Gordita-Regular.woff') format('woff'),
-    url('./public/fonts/Gordita/Gordita-Regular.ttf') format('truetype');
+  src: url('./fonts/gordita/Gordita-Regular.eot?#iefix') format('embedded-opentype'),
+    url('./fonts/gordita/Gordita-Regular.woff') format('woff'),
+    url('./fonts/gordita/Gordita-Regular.ttf') format('truetype');
   font-style: normal;
   font-display: fallback;
 }
 
 @font-face {
   font-family: 'Gordita';
-  src: url('./public/fonts/Gordita/Gordita-Thin.eot?#iefix') format('embedded-opentype'),
-    url('./public/fonts/Gordita/Gordita-Thin.woff') format('woff'),
-    url('./public/fonts/Gordita/Gordita-Thin.ttf') format('truetype');
+  src: url('./fonts/gordita/Gordita-Thin.eot?#iefix') format('embedded-opentype'),
+    url('./fonts/gordita/Gordita-Thin.woff') format('woff'),
+    url('./fonts/gordita/Gordita-Thin.ttf') format('truetype');
   font-weight: 100;
   font-style: normal;
   font-display: fallback;
@@ -68,9 +75,9 @@ h6 {
 
 @font-face {
   font-family: 'Gordita';
-  src: url('./public/fonts/Gordita/Gordita-Medium.eot?#iefix') format('embedded-opentype'),
-    url('./public/fonts/Gordita/Gordita-Medium.woff') format('woff'),
-    url('./public/fonts/Gordita/Gordita-Medium.ttf') format('truetype');
+  src: url('./fonts/gordita/Gordita-Medium.eot?#iefix') format('embedded-opentype'),
+    url('./fonts/gordita/Gordita-Medium.woff') format('woff'),
+    url('./fonts/gordita/Gordita-Medium.ttf') format('truetype');
   font-weight: 600;
   font-style: normal;
   font-display: fallback;
@@ -78,9 +85,9 @@ h6 {
 
 @font-face {
   font-family: 'Gordita';
-  src: url('./public/fonts/Gordita/Gordita-Bold.eot?#iefix') format('embedded-opentype'),
-    url('./public/fonts/Gordita/Gordita-Bold.woff') format('woff'),
-    url('./public/fonts/Gordita/Gordita-Bold.ttf') format('truetype');
+  src: url('./fonts/gordita/Gordita-Bold.eot?#iefix') format('embedded-opentype'),
+    url('./fonts/gordita/Gordita-Bold.woff') format('woff'),
+    url('./fonts/gordita/Gordita-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
   font-display: fallback;
@@ -90,15 +97,19 @@ h6 {
 	/* Base Colors */
 	--black: #333;
 	--white: #fff;
-	--lightgray: #f3f5f7;
-	--solidblue: #2c4f7c;
-	--darkdefault: #b8d7ff;
-	--primary: #4483c1;
+	--solid-blue: #4483c1;
+	--solid-darkblue: #2c4f7c;
+	--solid-lightblue: #b8d7ff;
 
 	/* Theme Colors */
 	--text-base: var(--black);
-	--bg-base: var(--lightgray);
-	--text-headings: var(--solidblue);
+	--text-links: var(--solid-blue);
+	--text-links-hover: var(--solid-darkblue);
+	--bg-base: var(--white);
+	--text-headings: var(--solid-darkblue);
+	--outline-headings: var(--gray-2);
+	--text-code: var(--gray-8);
+
 
 	/* Tailwind Colors */
 	--gray-1: #F3F4F6;
@@ -110,8 +121,26 @@ h6 {
 	--gray-7: #374151;
 	--gray-8: #1F2937;
 	--gray-9: #111827;
+
 	--slate-1: #F1F5F9;
-	--slate-3: #D1D5DB;
+	--slate-2: #E2E8F0;
+	--slate-3: #CBD5E1;
+	--slate-4: #94A3B8;
+	--slate-5: #64748B;
+	--slate-6: #475569;
+	--slate-7: #334155;
+	--slate-8: #1E293B;
+	--slate-9: #0F172A;
+
+	--neutral-1: #F5F5F5;
+	--neutral-2: #E5E5E5;
+	--neutral-3: #D4D4D4;
+	--neutral-4: #A3A3A3;
+	--neutral-5: #737373;
+	--neutral-6: #525252;
+	--neutral-7: #404040;
+	--neutral-8: #262626;
+	--neutral-9: #171717;
 
 	/* Tailwind Spacing */
 	--spacing-0-5: 0.125rem;
@@ -166,36 +195,43 @@ h6 {
 
 :root[data-theme='dark'] {
 	--text-base: var(--white);
-	--bg-base: var(--black);
-	--text-headings: var(--darkdefault);
+	--bg-base: var(--neutral-8);
+	--text-headings: var(--solid-lightblue);
+	--outline-headings: var(--neutral-6);
+	--text-links: var(--solid-lightblue);
+	--text-links-hover: var(--solid-blue);
+	--text-code: var(--neutral-9);
+}
+
+body {
+	background-color: var(--bg-base);
 }
 
 .prose {
 	color: var(--text-base);
 	font-size: 1rem;
-	line-height: 1.75rem;
+	line-height: var(--spacing-7);
 }
 
 .prose :is(h1, h2) {
 	line-height: 1.1111111;
-	border-bottom: 1px solid #e5e7eb;
+	border-bottom: 1px solid var(--outline-headings);
 	padding-bottom: var(--spacing-4);
 	margin-bottom: var(--spacing-6);
 }
 
 .prose :is(h1, h2, h3, h4) {
-	color: var(--text-headings);
-	/* TODO: Fonts aren't working, this should be font-weight: 600 */
 	font-weight: 600;
-	margin-top: var(--spacing-8);
+	color: var(--text-headings);
+	margin-top: var(--spacing-10);
 }
 
 .prose h1 {
-	font-size: 1.75rem;
+	font-size: var(--text-3xl);
 }
 
 .prose h3 {
-	font-size: 1.25rem;
+	font-size: var(--text-xl);
 	margin-bottom: var(--spacing-3);
 }
 
@@ -212,7 +248,7 @@ h6 {
 }
 
 .prose li::marker {
-	color: var(--gray-3);
+	color: var(--gray-5);
 }
 
 .prose p {
@@ -220,21 +256,11 @@ h6 {
 }
 
 .prose a {
-	color: #777;
-	text-decoration: none;
-	font-weight: 700;
-	background-image: linear-gradient(#e7e7e7,#e7e7e7);
-    background-repeat: no-repeat;
-    background-size: 100% 2px;
-    background-position: 0 1.1em;
-    padding-bottom: 0.4em;
-    transition: background-size .3s;
+	color: var(--text-links);
 }
 
 .prose a:is(:hover, :focus) {
-	color: var(--solidblue);
-	background-image: linear-gradient(#2c4f7c,#2c4f7c);
-    background-size: 100% 4px;
+	color: var(--text-links-hover);
 }
 
 .prose :not(pre) code {
@@ -245,7 +271,8 @@ h6 {
 
 .prose pre {
 	/* Override github-dark default background */
-	background-color: #1f2937 !important;
-	margin-block: var(--spacing-3);
+	background-color: var(--text-code) !important;
+	margin-top: var(--spacing-3);
+	margin-bottom: var(--spacing-7);
 	padding: var(--spacing-4) var(--spacing-3-5);
 }
