@@ -276,3 +276,7 @@ body {
 	margin-bottom: var(--spacing-7);
 	padding: var(--spacing-4) var(--spacing-3-5);
 }
+
+.prose img, video {
+	width: 100%;
+}
