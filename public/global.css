@@ -12,6 +12,7 @@
 }
 html,
 body {
+	font-family: Gordita, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";;
 	height: 100%;
 }
 body {
@@ -48,18 +49,18 @@ h6 {
 
 @font-face {
   font-family: 'Gordita';
-  src: url('./fonts/Gordita/Gordita-Regular.eot?#iefix') format('embedded-opentype'),
-    url('./fonts/Gordita/Gordita-Regular.woff') format('woff'),
-    url('./fonts/Gordita/Gordita-Regular.ttf') format('truetype');
+  src: url('./public/fonts/Gordita/Gordita-Regular.eot?#iefix') format('embedded-opentype'),
+    url('./public/fonts/Gordita/Gordita-Regular.woff') format('woff'),
+    url('./public/fonts/Gordita/Gordita-Regular.ttf') format('truetype');
   font-style: normal;
   font-display: fallback;
 }
 
 @font-face {
   font-family: 'Gordita';
-  src: url('./fonts/Gordita/Gordita-Thin.eot?#iefix') format('embedded-opentype'),
-    url('./fonts/Gordita/Gordita-Thin.woff') format('woff'),
-    url('./fonts/Gordita/Gordita-Thin.ttf') format('truetype');
+  src: url('./public/fonts/Gordita/Gordita-Thin.eot?#iefix') format('embedded-opentype'),
+    url('./public/fonts/Gordita/Gordita-Thin.woff') format('woff'),
+    url('./public/fonts/Gordita/Gordita-Thin.ttf') format('truetype');
   font-weight: 100;
   font-style: normal;
   font-display: fallback;
@@ -67,9 +68,9 @@ h6 {
 
 @font-face {
   font-family: 'Gordita';
-  src: url('./fonts/Gordita/Gordita-Medium.eot?#iefix') format('embedded-opentype'),
-    url('./fonts/Gordita/Gordita-Medium.woff') format('woff'),
-    url('./fonts/Gordita/Gordita-Medium.ttf') format('truetype');
+  src: url('./public/fonts/Gordita/Gordita-Medium.eot?#iefix') format('embedded-opentype'),
+    url('./public/fonts/Gordita/Gordita-Medium.woff') format('woff'),
+    url('./public/fonts/Gordita/Gordita-Medium.ttf') format('truetype');
   font-weight: 600;
   font-style: normal;
   font-display: fallback;
@@ -77,15 +78,16 @@ h6 {
 
 @font-face {
   font-family: 'Gordita';
-  src: url('./fonts/Gordita/Gordita-Bold.eot?#iefix') format('embedded-opentype'),
-    url('./fonts/Gordita/Gordita-Bold.woff') format('woff'),
-    url('./fonts/Gordita/Gordita-Bold.ttf') format('truetype');
+  src: url('./public/fonts/Gordita/Gordita-Bold.eot?#iefix') format('embedded-opentype'),
+    url('./public/fonts/Gordita/Gordita-Bold.woff') format('woff'),
+    url('./public/fonts/Gordita/Gordita-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
   font-display: fallback;
 }
 
 :root {
+	/* Base Colors */
 	--black: #333;
 	--white: #fff;
 	--lightgray: #f3f5f7;
@@ -93,16 +95,25 @@ h6 {
 	--darkdefault: #b8d7ff;
 	--primary: #4483c1;
 
-	/* Tailwind Colors */
-	--gray-3: #d1d5db;
-	--gray-4: #9ca3af
-	--slate-1: #F1F5F9;
-	--slate-3: #D1D5DB;
-
-	--text-base: var(--black)
+	/* Theme Colors */
+	--text-base: var(--black);
 	--bg-base: var(--lightgray);
 	--text-headings: var(--solidblue);
 
+	/* Tailwind Colors */
+	--gray-1: #F3F4F6;
+	--gray-2: #E5E7EB;
+	--gray-3: #d1d5db;
+	--gray-4: #9ca3af;
+	--gray-5: #6B7280;
+	--gray-6: #4B5563;
+	--gray-7: #374151;
+	--gray-8: #1F2937;
+	--gray-9: #111827;
+	--slate-1: #F1F5F9;
+	--slate-3: #D1D5DB;
+
+	/* Tailwind Spacing */
 	--spacing-0-5: 0.125rem;
 	--spacing-1: 0.25rem;
 	--spacing-1-5: 0.375rem;
@@ -137,9 +148,10 @@ h6 {
 	--spacing-80: 20rem;
 	--spacing-96: 24rem;
 
+	/* Tailwind Sizes */
 	--text-xs: 0.75rem;
 	--text-sm: 0.875rem;
-	--text-base: 1rem;
+	--text-default: 1rem;
 	--text-lg:: 1.125rem;
 	--text-xl: 1.25rem;
 	--text-2xl: 1.5rem;
@@ -156,4 +168,84 @@ h6 {
 	--text-base: var(--white);
 	--bg-base: var(--black);
 	--text-headings: var(--darkdefault);
+}
+
+.prose {
+	color: var(--text-base);
+	font-size: 1rem;
+	line-height: 1.75rem;
+}
+
+.prose :is(h1, h2) {
+	line-height: 1.1111111;
+	border-bottom: 1px solid #e5e7eb;
+	padding-bottom: var(--spacing-4);
+	margin-bottom: var(--spacing-6);
+}
+
+.prose :is(h1, h2, h3, h4) {
+	color: var(--text-headings);
+	/* TODO: Fonts aren't working, this should be font-weight: 600 */
+	font-weight: 600;
+	margin-top: var(--spacing-8);
+}
+
+.prose h1 {
+	font-size: 1.75rem;
+}
+
+.prose h3 {
+	font-size: 1.25rem;
+	margin-bottom: var(--spacing-3);
+}
+
+.prose h4 {
+	margin-bottom: var(--spacing-2);
+}
+
+.prose :is(ul, ol) {
+	padding-left: var(--spacing-8);
+}
+
+.prose li {
+	margin-block: var(--spacing-2);
+}
+
+.prose li::marker {
+	color: var(--gray-3);
+}
+
+.prose p {
+	margin-block: var(--spacing-5);
+}
+
+.prose a {
+	color: #777;
+	text-decoration: none;
+	font-weight: 700;
+	background-image: linear-gradient(#e7e7e7,#e7e7e7);
+    background-repeat: no-repeat;
+    background-size: 100% 2px;
+    background-position: 0 1.1em;
+    padding-bottom: 0.4em;
+    transition: background-size .3s;
+}
+
+.prose a:is(:hover, :focus) {
+	color: var(--solidblue);
+	background-image: linear-gradient(#2c4f7c,#2c4f7c);
+    background-size: 100% 4px;
+}
+
+.prose :not(pre) code {
+	padding: var(--spacing-0-5);
+	background-color: rgb(203 213 225 / 0.2);
+	border-radius: var(--spacing-1-5);
+}
+
+.prose pre {
+	/* Override github-dark default background */
+	background-color: #1f2937 !important;
+	margin-block: var(--spacing-3);
+	padding: var(--spacing-4) var(--spacing-3-5);
 }

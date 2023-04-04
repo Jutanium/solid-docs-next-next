@@ -5,12 +5,17 @@ import mdx from "@astrojs/mdx";
 
 // https://astro.build/config
 export default defineConfig({
-	integrations: [solidJs(), mdx()],
-	vite: {
-		plugins: [
-			Icons({
-				compiler: "solid",
-			}),
-		],
-	},
+  integrations: [solidJs(), mdx()],
+  vite: {
+    plugins: [
+      Icons({
+        compiler: "solid",
+      }),
+    ],
+  },
+  markdown: {
+    shikiConfig: {
+      theme: "github-dark",
+    },
+  },
 });
