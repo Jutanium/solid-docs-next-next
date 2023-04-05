@@ -213,7 +213,7 @@ body {
 	line-height: var(--spacing-7);
 }
 
-.prose :is(h1, h2) {
+.divider, .prose :is(h1, h2) {
 	line-height: 1.1111111;
 	border-bottom: 1px solid var(--outline-headings);
 	padding-bottom: var(--spacing-4);
