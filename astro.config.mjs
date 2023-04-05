@@ -3,8 +3,9 @@ import solidJs from "@astrojs/solid-js";
 import Icons from "unplugin-icons/vite";
 import mdx from "@astrojs/mdx";
 
-// https://astro.build/config
 export default defineConfig({
+  /* TODO: Update site property if we end up using another domain */
+  site: "https://docs.solidjs.com/",
   integrations: [solidJs(), mdx()],
   vite: {
     plugins: [

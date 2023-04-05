@@ -1,48 +1,47 @@
 ---
+import { sidebar } from "../sidebar";
+
+interface Props {
+  currentPage: string;
+}
+
+const { currentPage } = Astro.props;
 ---
 
 <nav aria-label="Primary">
-  <h2 class="divider">Getting Started</h2>
-  <ul>
-    <li><a href="/" aria-current="page">What is SolidStart?</a></li>
-    <li><a href="/test">Project setup</a></li>
-  </ul>
-  <h2 class="divider">Getting Started</h2>
-  <ul>
-    <li><a href="/" aria-current="page">What is SolidStart?</a></li>
-    <li><a href="/test">Project setup</a></li>
-  </ul>
-  <h2 class="divider">Getting Started</h2>
-  <ul>
-    <li><a href="/" aria-current="page">What is SolidStart?</a></li>
-    <li><a href="/test">Project setup</a></li>
-  </ul>
-  <h2 class="divider">Getting Started</h2>
-  <ul>
-    <li><a href="/" aria-current="page">What is SolidStart?</a></li>
-    <li><a href="/test">Project setup</a></li>
-  </ul>
-  <h2 class="divider">Getting Started</h2>
-  <ul>
-    <li><a href="/" aria-current="page">What is SolidStart?</a></li>
-    <li><a href="/test">Project setup</a></li>
-  </ul>
-  <h2 class="divider">Getting Started</h2>
-  <ul>
-    <li><a href="/" aria-current="page">What is SolidStart?</a></li>
-    <li><a href="/test">Project setup</a></li>
-  </ul>
+  {
+    Object.entries(sidebar).map(([header, children]) => (
+      <>
+        <h2 class="divider">{header}</h2>
+        <ul>
+          {children.map(({ slug, text }) => {
+            return (
+              <li>
+                <a
+                  href={`${Astro.site?.pathname}${slug}/`}
+                  aria-current={currentPage.includes(slug) ? "page" : false}
+                >
+                  {text}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </>
+    ))
+  }
 </nav>
 
 <style>
   nav {
-    background-color: var(--slate-1);
+    background-color: var(--bg-secondary);
     padding: var(--spacing-7);
     height: calc(100vh - var(--header-height));
     overflow-y: auto;
   }
 
   nav h2 {
+    color: var(--text-base);
     font-size: var(--text-xl);
     font-weight: 400;
     padding-bottom: var(--spacing-2);
@@ -59,7 +58,7 @@
   }
 
   li a {
-    color: var(--gray-5);
+    color: var(--text-secondary);
     text-decoration: none;
     font-weight: 600;
   }

@@ -1,29 +1,32 @@
 ---
+import type { MarkdownHeading } from "astro";
+import type { CollectionEntry } from "astro:content";
 import LeftSidebar from "../components/LeftSidebar.astro";
 import RightSidebar from "../components/RightSidebar.astro";
 import Header from "../components/Header.astro";
 
-import type { MarkdownLayoutProps } from "astro";
+interface Props {
+  content: CollectionEntry<"docs">["data"];
+  headings: MarkdownHeading[];
+}
 
-type Props = MarkdownLayoutProps<{
-  title: string;
-}>;
+const { content, headings } = Astro.props;
 
-const { frontmatter } = Astro.props;
+const currentPage = Astro.url.pathname;
 ---
 
 <html>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./global.css" />
-    <title>{frontmatter.title}</title>
+    <link rel="stylesheet" href="/global.css" />
+    <title>{content.title}</title>
   </head>
   <body>
     <Header />
     <main>
       <aside class="left-side">
-        <LeftSidebar />
+        <LeftSidebar currentPage={currentPage} />
       </aside>
       <div class="content-container">
         <article class="prose">
@@ -31,7 +34,7 @@ const { frontmatter } = Astro.props;
         </article>
       </div>
       <aside class="right-side">
-        <RightSidebar />
+        <RightSidebar headings={headings} />
       </aside>
     </main>
   </body>

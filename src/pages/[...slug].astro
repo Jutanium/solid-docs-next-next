@@ -1,0 +1,17 @@
+---
+import { allPages } from "../content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  return allPages.map((page) => {
+    const slug = page.slug;
+
+    return { params: { slug }, props: page };
+  });
+}
+
+const { data, render } = Astro.props;
+const { Content, headings } = await render();
+---
+
+<BaseLayout content={data} headings={headings}><Content /></BaseLayout>

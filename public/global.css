@@ -103,9 +103,11 @@ h6 {
 
 	/* Theme Colors */
 	--text-base: var(--black);
+	--text-secondary: var(--gray-5);
 	--text-links: var(--solid-blue);
 	--text-links-hover: var(--solid-darkblue);
 	--bg-base: var(--white);
+	--bg-secondary: var(--slate-1);
 	--text-headings: var(--solid-darkblue);
 	--outline-headings: var(--gray-2);
 	--text-code: var(--gray-8);
@@ -195,7 +197,9 @@ h6 {
 
 :root[data-theme='dark'] {
 	--text-base: var(--white);
+	--text-secondary: var(--gray-3);
 	--bg-base: var(--neutral-8);
+	--bg-secondary: var(--neutral-9);
 	--text-headings: var(--solid-lightblue);
 	--outline-headings: var(--neutral-6);
 	--text-links: var(--solid-lightblue);
