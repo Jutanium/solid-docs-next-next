@@ -1,5 +1,5 @@
 import { createMutationObserver } from "@solid-primitives/mutation-observer";
-import { createMemo, createSignal } from "solid-js";
+import { createSignal } from "solid-js";
 
 // https://github.com/codemirror/theme-one-dark/blob/main/src/one-dark.ts
 

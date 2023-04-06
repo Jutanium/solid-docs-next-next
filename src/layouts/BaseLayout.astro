@@ -1,4 +1,6 @@
 ---
+import "../../public/global.css";
+import Preferences from "../components/Preferences/Preferences";
 import ThemeToggle from "../components/ThemeToggle";
 
 import type { MarkdownLayoutProps } from "astro";
@@ -7,7 +9,7 @@ type Props = MarkdownLayoutProps<{
   title: string;
 }>;
 
-const { frontmatter } = Astro.props;
+const { frontmatter }: Props = Astro.props;
 ---
 
 <html>
