@@ -1,4 +1,4 @@
-import { For, createEffect, createSignal, onMount } from "solid-js";
+import { For, createEffect } from "solid-js";
 import { RadioGroup } from "@kobalte/core";
 import type { Component } from "solid-js";
 import IconJs from "~icons/logos/javascript";
