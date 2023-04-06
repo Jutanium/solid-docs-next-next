@@ -1,5 +1,6 @@
 ---
 import "../../public/global.css";
+import Preferences from "../components/Preferences/Preferences";
 import ThemeToggle from "../components/ThemeToggle";
 
 import type { MarkdownLayoutProps } from "astro";
@@ -8,13 +9,14 @@ type Props = MarkdownLayoutProps<{
 	title: string;
 }>;
 
-const { frontmatter } = Astro.props;
+const { frontmatter }: Props = Astro.props;
 ---
 
 <html>
 	<title>{frontmatter.title}</title>
 	<body>
 		<ThemeToggle client:load />
+		<Preferences client:load />
 		<slot />
 		<script is:inline>
 			const theme = (() => {
@@ -33,5 +35,11 @@ const { frontmatter } = Astro.props;
 			document.documentElement.setAttribute("data-theme", theme);
 			window.localStorage.setItem("theme", theme);
 		</script>
+		<style>
+			body {
+				background-color: var(--bg-base);
+				color: var(--text-base);
+			}
+		</style>
 	</body>
 </html>
