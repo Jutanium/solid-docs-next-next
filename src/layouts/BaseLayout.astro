@@ -1,52 +1,74 @@
 ---
-import "../../public/global.css";
-import Preferences from "../components/Preferences/Preferences";
-import ThemeToggle from "../components/ThemeToggle";
+import type { MarkdownHeading } from "astro";
+import type { CollectionEntry } from "astro:content";
+import LeftSidebar from "../components/LeftSidebar.astro";
+import RightSidebar from "../components/RightSidebar.astro";
+import Header from "../components/Header.astro";
 
-import type { MarkdownLayoutProps } from "astro";
+interface Props {
+  content: CollectionEntry<"docs">["data"];
+  headings: MarkdownHeading[];
+}
 
-type Props = MarkdownLayoutProps<{
-  title: string;
-}>;
+const { content, headings } = Astro.props;
 
-const { frontmatter }: Props = Astro.props;
+const currentPage = Astro.url.pathname;
 ---
 
 <html>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./global.css" />
-    <title>{frontmatter.title}</title>
+    <link rel="stylesheet" href="/global.css" />
+    <title>{content.title}</title>
   </head>
   <body>
-    <ThemeToggle client:load />
+    <Header />
     <main>
-      <aside>
-        <nav></nav>
+      <aside class="left-side">
+        <LeftSidebar currentPage={currentPage} />
       </aside>
       <div class="content-container">
         <article class="prose">
           <slot />
         </article>
       </div>
-      <aside>
-        <nav></nav>
+      <aside class="right-side">
+        <RightSidebar headings={headings} />
       </aside>
     </main>
   </body>
 </html>
 
 <style>
-  .content-container {
-    margin: auto;
-    max-width: 65ch;
-    padding-block: var(--spacing-4);
-    padding-inline: var(--spacing-2);
+  main {
+    display: flex;
+    flex-direction: row;
+    padding-top: var(--header-height);
   }
 
-  article {
+  .content-container {
+    width: 100%;
+    max-width: 65ch;
+    margin-inline: auto;
+    padding-block: var(--spacing-4);
     padding-inline: var(--spacing-10);
+  }
+
+  aside {
+    position: sticky;
+    top: var(--header-height);
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+  }
+
+  .left-side {
+    max-width: 300px;
+  }
+
+  .right-side {
+    max-width: 240px;
   }
 </style>
 
