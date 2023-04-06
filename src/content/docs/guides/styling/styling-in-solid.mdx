@@ -1,0 +1,186 @@
+---
+title: Styling in Solid
+active: false
+---
+
+{/* TODO: Add interactive examples to this guide */}
+
+Styling in Solid is slightly similar to styling in HTML. The main difference is that Solid apps use Vite to bundle the code, which means that you can use more styling solutions than you could in HTML.
+
+This guide will teach you the basic concepts for styling your Solid apps as well as some advanced APIs such as `classList` and `JSX.CSSProperties`.
+
+We also have guides for [CSS Modules](#TODO), [Sass](#TODO), [Tailwind CSS](#TODO), [UnoCSS](#TODO), and [WindiCSS](#TODO).
+
+## The Basics
+
+```jsx
+<div class="container" style={{ "background-color": "red" }}>
+  <h1>Hello</h1>
+</div>
+```
+
+We use the `class` and `style` attributes to style elements. The `class` attribute lets you style one or more elements with a CSS class, and the `style` attribute lets you style one element with a CSS style.
+
+We advise you to use the `class` attribute for styling elements as they are statically optimised and self-documenting. That being said, inline styles are useful for prototyping, setting CSS variables using runtime values, and overriding classes. Use what makes sense for you and don’t be afraid to experiment.
+
+## Hands on With Inline Styles
+
+Solid supports inline styles using the `style` attribute. The `style` attribute accepts a string or an object. If you pass a string, it will be applied as a CSS style. If you pass an object, it will be converted to a string and applied as a CSS style. In practice this means that you can use either of the following:
+
+```jsx
+<div style="color: red">Hello</div>
+<div style={{ color: "red" }}>Hello</div>
+```
+
+{/* TODO: this should be in a note/info aside */}
+{/* Note that style strings and style objects always use kebab-case syntax. This means `<div style={{ backgroundColor: "red" }}>` interpolates as `<div style="backgroundColor: red;">` which is invalid CSS. Solid always interpolates CSS properties as-is, for example `<div style={{"background-color": "red"}}>`. */}
+
+This code should give you an idea of what styling using style strings and style objects looks like:
+
+```jsx
+// This component is styled using inline styles as strings.
+function StyledStringComponent() {
+  const backgroundColor = "yellow";
+  const fontWeight = "bold";
+  return (
+    <>
+      <div style={`background-color: ${backgroundColor};`}>
+        <h1 style={`color: red; font-weight: ${fontWeight};`}>
+          Hello World in red
+        </h1>
+        <h1 style="color: rgb(0, 255, 0); padding: 20px;">
+          Hello World in green
+        </h1>
+        <h1 style="color: blue;">Hello World in blue</h1>
+      </div>
+    </>
+  );
+}
+// This component is styled using inline styles as objects.
+function StyledObjectComponent() {
+  const backgroundColor = "yellow";
+  const fontWeight = "bold";
+  return (
+    <>
+      <div style={{ "background-color": backgroundColor }}>
+        <h1 style={{ color: "red", "font-weight": fontWeight }}>
+          Hello World in red
+        </h1>
+        <h1 style={{ color: "rgb(0, 255, 0)", padding: "20px" }}>
+          Hello World in green
+        </h1>
+        <h1 style={{ color: "blue" }}>Hello World in blue</h1>
+      </div>
+    </>
+  );
+}
+```
+
+Every CSS property can be used as inline styles, ranging from simple `background-color` all the way to complex `mask-mode`.
+
+## Hands on With CSS Classes
+
+```jsx
+function StyledComponent() {
+  return (
+    <>
+      <div class="container">
+        <h1>Hello</h1>
+      </div>
+    </>
+  );
+}
+```
+
+In addition to classes Solid supports `classList` which allows you to conditionally apply CSS classes to elements. This is useful for applying classes based on runtime values, such as the state of a component.
+
+If you are just getting started, you can add a `<style>` tag to help you prototype classes side-by-side with your other tags.
+
+{/* TODO : Add to an aside */}
+{/* Note that the community provides packages such as solid-styled which scopes CSS much the same way as scoped styles in Vue, Svelte, and Astro. */}
+
+Here's an example of a simple card component with the `<style>` tag:
+
+```jsx
+// Card.jsx
+function Card() {
+  return (
+    <>
+      <style>{`
+      .grid { display: grid; }
+      .grid.grid-center { place-items: center; }
+      .screen { min-height: 100vh; }
+      .card {
+        height: 160px;
+        aspect-ratio: 2;
+        border-radius: 16px;
+        background-color: white;
+        box-shadow: 0 0 0 4px hsl(0 0% 0% / 15%);
+      }
+    `}</style>
+      <div class="grid grid-center screen">
+        <div class="card">Hello, world!</div>
+      </div>
+    </>
+  );
+}
+```
+
+It's common practice to use `<style>` tags to prototype CSS classes during the prototyping phase and then move them to a separate file once you're ready for production. This is because `<style>` tags are not statically optimised and can cause performance issues as well as make your code harder to read.
+
+Here's an example of a simple card component with a separate CSS file:
+
+```jsx
+// Card.jsx
+import "./Card.css";
+
+function Card() {
+  return (
+    <>
+      <div class="grid grid-center screen">
+        <div class="card">Hello, world!</div>
+      </div>
+    </>
+  );
+}
+```
+
+```css
+/* Card.css */
+.grid {
+  display: grid;
+}
+.grid.grid-center {
+  place-items: center;
+}
+.screen {
+  min-height: 100vh;
+}
+.card {
+  height: 160px;
+  aspect-ratio: 2;
+  border-radius: 16px;
+  background-color: white;
+  box-shadow: 0 0 0 4px hsl(0 0% 0% / 15%);
+}
+```
+
+Provided that `card.css` and `Card.jsx` are in the same folder, `Card.jsx` can import `card.css` using relative syntax. Colocating CSS files next to component files is generally a good strategy for organization.
+
+{/* TODO: Add as footnote */}
+{/* Relative syntax is when a file starts with ./ */}
+
+By importing `./card.css`, we’ve imported classes `.grid`, `.grid.center`, `.screen`, `.card` as globally scoped CSS. This means any elements that use one or more of these class names will automatically inherit these styles. There are pros and cons to this approach, but if you are interested in automatically scoping classes to the importer, you can use [CSS Modules](#TODO).
+
+For global CSS not specific to components, we recommend creating and maintaining `src/index.css`, imported by `src/index.jsx`. For component CSS, we recommend creating and maintaining `src/components/<component>.css`, imported by `src/components/<Component>.jsx`.
+
+For example: 
+
+```
+src/
+  index.css
+  index.jsx (imports index.css)
+  components/
+    nav.css
+    Nav.jsx (imports nav.css)
+```
