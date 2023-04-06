@@ -13,6 +13,9 @@ dependencies:
   '@solid-primitives/mutation-observer':
     specifier: ^1.1.10
     version: 1.1.10(solid-js@1.7.1)
+  '@solid-primitives/storage':
+    specifier: ^1.3.9
+    version: 1.3.9(solid-js@1.7.1)
   astro:
     specifier: ^2.1.9
     version: 2.1.9
@@ -975,6 +978,15 @@ packages:
 
   /@solid-primitives/static-store@0.0.2(solid-js@1.7.1):
     resolution: {integrity: sha512-JR51MmoZbFWE7fmzm0NnfS4RuLHpzXpPqAb7RJu3fHDGHp+q7v4KylseULcailINzDIosHQXbpiDQlj2Lx9zbQ==}
+    peerDependencies:
+      solid-js: ^1.6.12
+    dependencies:
+      '@solid-primitives/utils': 6.0.0(solid-js@1.7.1)
+      solid-js: 1.7.1
+    dev: false
+
+  /@solid-primitives/storage@1.3.9(solid-js@1.7.1):
+    resolution: {integrity: sha512-ysJSIycmToQD8Hpt4jpIlh7U8EuYdpQwkamppng3g93E5f6RZVPCzYmRZ+ckRN2cNLFpAuTEqZx7OBRh3PBWFQ==}
     peerDependencies:
       solid-js: ^1.6.12
     dependencies:
