@@ -34,6 +34,7 @@ const { currentPage } = Astro.props;
 
 <style>
   nav {
+    width: 100%;
     background-color: var(--bg-secondary);
     padding: var(--spacing-7);
     height: calc(100vh - var(--header-height));
@@ -65,5 +66,12 @@ const { currentPage } = Astro.props;
 
   li a[aria-current="page"] {
     color: var(--solid-blue);
+  }
+
+  nav h2:hover, li a:hover {
+    color: var(--gray-4);
+    transition: color;
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    transition-duration: .15s;
   }
 </style>
