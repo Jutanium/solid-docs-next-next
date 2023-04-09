@@ -6,8 +6,8 @@ import RightSidebar from "../components/RightSidebar.astro";
 import Header from "../components/Header/Header.astro";
 
 interface Props {
-	content: CollectionEntry<"docs">["data"];
-	headings: MarkdownHeading[];
+  content: CollectionEntry<"docs">["data"];
+  headings: MarkdownHeading[];
 }
 
 const { content, headings } = Astro.props;
@@ -19,6 +19,8 @@ const currentPage = Astro.url.pathname;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/logos/solid-icon.svg" />
+    <link rel="alternate icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="stylesheet" href="/global.css" />
     <title>{content.title}</title>
   </head>
@@ -109,16 +111,16 @@ const currentPage = Astro.url.pathname;
 </style>
 
 <script is:inline>
-	const theme = (() => {
-		if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
-			return localStorage.getItem("theme");
-		}
-		if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-			return "dark";
-		}
-		return "light";
-	})();
+  const theme = (() => {
+    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+      return localStorage.getItem("theme");
+    }
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      return "dark";
+    }
+    return "light";
+  })();
 
-	document.documentElement.setAttribute("data-theme", theme);
-	window.localStorage.setItem("theme", theme);
+  document.documentElement.setAttribute("data-theme", theme);
+  window.localStorage.setItem("theme", theme);
 </script>

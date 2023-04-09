@@ -5,35 +5,35 @@ import { ToggleButton } from "@kobalte/core";
 import styles from "./ThemeToggle.module.css";
 
 const ThemeToggle: Component = () => {
-	const [isDark, setIsDark] = createSignal<boolean>(false);
+  const [isDark, setIsDark] = createSignal<boolean>(false);
 
-	onMount(() => {
-		setIsDark(localStorage.getItem("theme") === "dark");
-	});
+  onMount(() => {
+    setIsDark(localStorage.getItem("theme") === "dark");
+  });
 
-	createEffect(() => {
-		if (isDark()) {
-			document.documentElement.setAttribute("data-theme", "dark");
-		} else {
-			document.documentElement.setAttribute("data-theme", "light");
-		}
-	});
+  createEffect(() => {
+    if (isDark()) {
+      document.documentElement.setAttribute("data-theme", "dark");
+    } else {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+  });
 
-	function toggleTheme() {
-		setIsDark(!isDark());
-		localStorage.setItem("theme", isDark() ? "dark" : "light");
-	}
+  function toggleTheme() {
+    setIsDark(!isDark());
+    localStorage.setItem("theme", isDark() ? "dark" : "light");
+  }
 
-	return (
-		<ToggleButton.Root
-			isPressed={isDark()}
-			onPressedChange={toggleTheme}
-			class={styles.button}
-			aria-label="Mute"
-		>
-			{(state) => (state.isPressed() ? <CarbonMoon /> : <CarbonSun />)}
-		</ToggleButton.Root>
-	);
+  return (
+    <ToggleButton.Root
+      isPressed={isDark()}
+      onPressedChange={toggleTheme}
+      class={styles.button}
+      aria-label="Mute"
+    >
+      {(state) => (state.isPressed() ? <CarbonMoon /> : <CarbonSun />)}
+    </ToggleButton.Root>
+  );
 };
 
 export default ThemeToggle;

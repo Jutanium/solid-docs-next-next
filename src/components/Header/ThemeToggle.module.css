@@ -1,14 +1,11 @@
 .button {
-	background: none;
-	border: none;
-	pointer: cursor;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
 .button svg {
-	width: 38px;
-	height: 38px;
-}
-
-[data-theme="dark"] .button svg {
-	color: white;
+  width: 38px;
+  height: 38px;
+  color: var(--text-base);
 }
