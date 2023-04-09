@@ -28,11 +28,11 @@ const currentPage = Astro.url.pathname;
       <aside class="left-side">
         <LeftSidebar currentPage={currentPage} />
       </aside>
-      <div class="content-container">
+      <section class="content-container">
         <article class="prose">
           <slot />
         </article>
-      </div>
+      </section>
       <aside class="right-side">
         <RightSidebar headings={headings} />
       </aside>
@@ -41,6 +41,16 @@ const currentPage = Astro.url.pathname;
 </html>
 
 <style>
+  :root {
+    --left-sidebar-width: 300px;
+    --right-sidebar-width: 240px;
+  }
+
+  html {
+    scroll-margin-top: calc(var(--header-height) + 20px);
+    scroll-padding-top: calc(var(--header-height) + 20px);
+  }
+
   main {
     display: flex;
     flex-direction: row;
@@ -49,26 +59,52 @@ const currentPage = Astro.url.pathname;
 
   .content-container {
     width: 100%;
-    max-width: 65ch;
+    min-width: 0;
+  }
+
+  article {
+    max-width: 60ch;
     margin-inline: auto;
     padding-block: var(--spacing-4);
     padding-inline: var(--spacing-10);
   }
 
   aside {
-    position: sticky;
+    display: flex;
+    position: fixed;
     top: var(--header-height);
-    height: 100%;
-    width: 100%;
     overflow-y: auto;
   }
 
   .left-side {
-    max-width: 300px;
+    visibility: hidden;
+    width: var(--left-sidebar-width);
   }
 
   .right-side {
-    max-width: 240px;
+    visibility: hidden;
+    inset-inline-end: 0;
+    width: var(--right-sidebar-width);
+  }
+
+  @media (min-width: 72em) {
+    .content-container {
+      margin-inline-end: var(--right-sidebar-width);
+    }
+
+    .right-side {
+      visibility: visible;
+    }
+  }
+
+  @media (min-width: 50em) {
+    .content-container {
+      margin-inline-start: var(--left-sidebar-width);
+    }
+
+    .left-side {
+      visibility: visible;
+    }
   }
 </style>
 
