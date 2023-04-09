@@ -2,6 +2,7 @@ import { Component, createEffect, createSignal, onMount } from "solid-js";
 import CarbonSun from "~icons/carbon/sun";
 import CarbonMoon from "~icons/carbon/moon";
 import { ToggleButton } from "@kobalte/core";
+import styles from "./ThemeToggle.module.css";
 
 const ThemeToggle: Component = () => {
 	const [isDark, setIsDark] = createSignal<boolean>(false);
@@ -27,7 +28,7 @@ const ThemeToggle: Component = () => {
 		<ToggleButton.Root
 			isPressed={isDark()}
 			onPressedChange={toggleTheme}
-			class="h-8 w-8"
+			class={styles.button}
 			aria-label="Mute"
 		>
 			{(state) => (state.isPressed() ? <CarbonMoon /> : <CarbonSun />)}

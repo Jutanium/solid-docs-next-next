@@ -1,0 +1,14 @@
+.button {
+	background: none;
+	border: none;
+	pointer: cursor;
+}
+
+.button svg {
+	width: 38px;
+	height: 38px;
+}
+
+[data-theme="dark"] .button svg {
+	color: white;
+}

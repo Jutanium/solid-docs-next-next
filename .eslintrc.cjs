@@ -26,6 +26,10 @@ module.exports = {
 			},
 			rules: {},
 		},
+		{
+			extends: ["plugin:solid/typescript"],
+			files: ["*.tsx"],
+		},
 	],
 	extends: [
 		"eslint:recommended",
