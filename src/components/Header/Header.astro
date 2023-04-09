@@ -1,0 +1,32 @@
+---
+import ThemeToggle from "./ThemeToggle";
+import Logo from "./Logo";
+---
+
+<header>
+	<Logo client:load />
+	<ThemeToggle client:load />
+</header>
+
+<style>
+	:root {
+		--header-height: 50px;
+	}
+
+	header {
+		position: fixed;
+		padding-left: 1.5rem;
+		padding-right: 0.5rem;
+		display: flex;
+		justify-content: space-between;
+		background-color: var(--bg-base);
+		width: 100%;
+		height: var(--header-height);
+		box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+		z-index: 999;
+	}
+
+	header > div {
+		display: flex;
+	}
+</style>

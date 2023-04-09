@@ -3,11 +3,11 @@ import type { MarkdownHeading } from "astro";
 import type { CollectionEntry } from "astro:content";
 import LeftSidebar from "../components/LeftSidebar.astro";
 import RightSidebar from "../components/RightSidebar.astro";
-import Header from "../components/Header.astro";
+import Header from "../components/Header/Header.astro";
 
 interface Props {
-  content: CollectionEntry<"docs">["data"];
-  headings: MarkdownHeading[];
+	content: CollectionEntry<"docs">["data"];
+	headings: MarkdownHeading[];
 }
 
 const { content, headings } = Astro.props;
@@ -109,16 +109,16 @@ const currentPage = Astro.url.pathname;
 </style>
 
 <script is:inline>
-  const theme = (() => {
-    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
-      return localStorage.getItem("theme");
-    }
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      return "dark";
-    }
-    return "light";
-  })();
+	const theme = (() => {
+		if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+			return localStorage.getItem("theme");
+		}
+		if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+			return "dark";
+		}
+		return "light";
+	})();
 
-  document.documentElement.setAttribute("data-theme", theme);
-  window.localStorage.setItem("theme", theme);
+	document.documentElement.setAttribute("data-theme", theme);
+	window.localStorage.setItem("theme", theme);
 </script>

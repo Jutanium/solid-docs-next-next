@@ -1,0 +1,12 @@
+.div {
+	display: flex;
+	align-items: center;
+}
+
+.s {
+	height: 36px;
+}
+
+.name {
+	height: 42px;
+}
