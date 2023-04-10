@@ -1,0 +1,85 @@
+---
+import IconBulb from "~icons/heroicons-solid/light-bulb";
+import IconBrain from "~icons/mdi/brain";
+import IconPencil from "~icons/mdi/lead-pencil";
+import IconAlertDecagram from "~icons/mdi/alert-decagram";
+import IconReact from "~icons/mdi/react";
+import IconVue from "~icons/mdi/vuejs";
+import IconAngular from "~icons/mdi/angular";
+import IconSvelte from "~icons/simple-icons/svelte";
+
+import type { JSX } from "solid-js/types/jsx";
+
+// prettier-ignore
+export type asideType = "vue" | "react" | "angular" | "svelte" | "note" | "warning" | "tip" |"advanced";
+
+export interface Props {
+	type: asideType;
+	title?: string;
+}
+
+const asides: {
+	[key in asideType]: {
+		title: string;
+		logo: JSX.Element;
+	};
+} = {
+	vue: {
+		title: "Since you're coming from Vue",
+		logo: IconVue,
+	},
+	react: {
+		title: "Since you're coming from React",
+		logo: IconReact,
+	},
+	angular: {
+		title: "Since you're coming from Angular",
+		logo: IconAngular,
+	},
+	svelte: {
+		title: "Since you're coming from Svelte",
+		logo: IconSvelte,
+	},
+	note: {
+		title: "Note",
+		logo: IconBulb,
+	},
+	warning: {
+		title: "Warning",
+		logo: IconAlertDecagram,
+	},
+	tip: {
+		title: "Tip",
+		logo: IconPencil,
+	},
+	advanced: {
+		title: "Advanced",
+		logo: IconBrain,
+	},
+};
+
+const { type, title } = Astro.props as Props;
+
+const Logo = asides[type].logo;
+---
+
+<aside>
+	<header>
+		<Logo />
+		{title || asides[type].title}
+	</header>
+	<slot />
+</aside>
+
+<style>
+	aside {
+		background-color: var(--solid-darkblue);
+		color: var(--white);
+	}
+
+	header {
+		display: flex;
+		align-items: center;
+		font-weight: bold;
+	}
+</style>

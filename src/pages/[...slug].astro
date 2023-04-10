@@ -1,16 +1,17 @@
 ---
+import type { CollectionEntry } from "astro:content";
 import { allPages } from "../content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-export async function getStaticPaths() {
-  return allPages.map((page) => {
-    const slug = page.slug;
+export function getStaticPaths() {
+	return allPages.map((page) => {
+		const slug = page.slug;
 
-    return { params: { slug }, props: page };
-  });
+		return { params: { slug }, props: page };
+	});
 }
 
-const { data, render } = Astro.props;
+const { data, render } = Astro.props as CollectionEntry<"docs">;
 const { Content, headings } = await render();
 ---
 

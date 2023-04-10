@@ -40,5 +40,6 @@ module.exports = {
 	],
 	rules: {
 		"no-undef": "off",
+		"solid/prefer-for": "off",
 	},
 };

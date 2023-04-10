@@ -1,12 +1,7 @@
 import { createLocalStorage } from "@solid-primitives/storage";
-import { createEffect } from "solid-js";
 
 const [store, setStore] = createLocalStorage({
 	prefix: "solid-docs-next-next",
-});
-
-createEffect(() => {
-	console.log(store.framework, store.jsTs);
 });
 
 export const frameworks = [
