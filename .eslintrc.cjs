@@ -30,6 +30,12 @@ module.exports = {
 			extends: ["plugin:solid/typescript"],
 			files: ["*.tsx"],
 		},
+		{
+			files: ["*.tsx"],
+			rules: {
+				"solid/prefer-for": "off",
+			},
+		},
 	],
 	extends: [
 		"eslint:recommended",
@@ -40,6 +46,5 @@ module.exports = {
 	],
 	rules: {
 		"no-undef": "off",
-		"solid/prefer-for": "off",
 	},
 };

@@ -1,24 +1,19 @@
 import type { JSX } from "solid-js/jsx-runtime";
 
 import preferences from "./Preferences/usePreferences";
-import { Dynamic, Match, Switch } from "solid-js/web";
+import { Match, Switch } from "solid-js";
 import type { framework } from "./Preferences/usePreferences";
-import { frameworks } from "./Preferences/usePreferences";
 
-type Framework = Omit<framework, "none">;
+type Framework = Exclude<framework, "none">;
 
-export default function FrameworkAside(props: {
-	vue?: JSX.Element;
-	react?: JSX.Element;
-	angular?: JSX.Element;
-	svelte?: JSX.Element;
-}) {
+type Props = { [K in Framework]?: JSX.Element };
+export default function FrameworkAside(props: Props) {
 	const [{ framework }, { setFramework }] = preferences;
 
 	return (
 		<Switch>
-			{["vue", "react", "angular", "svelte"].map((f) => (
-				<Match when={framework() === f}>{props[f]}</Match>
+			{Object.keys(props).map((f) => (
+				<Match when={framework() === f}>{props[f as Framework]}</Match>
 			))}
 		</Switch>
 	);
