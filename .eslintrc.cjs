@@ -31,7 +31,7 @@ module.exports = {
 			files: ["*.tsx"],
 		},
 		{
-			files: ["*.tsx"],
+			files: ["*.tsx", "*.astro"],
 			rules: {
 				"solid/prefer-for": "off",
 			},

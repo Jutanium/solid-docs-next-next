@@ -1,2 +1,11 @@
 ---
+import FrameworkAside from "./FrameworkAside.tsx";
+import Aside from "./Aside.astro";
 ---
+
+<FrameworkAside client:load>
+	<Aside type="react" slot="react"><slot name="react" /></Aside>
+	<Aside type="vue" slot="vue"><slot name="vue" /></Aside>
+	<Aside type="svelte" slot="svelte"><slot name="svelte" /></Aside>
+	<Aside type="angular" slot="angular"><slot name="angular" /></Aside>
+</FrameworkAside>
