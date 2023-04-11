@@ -1,3 +1,114 @@
-.selected {
-	border: 2px solid #f5f5f5;
+:root {
+  --preferences-background: var(--slate-1);
+  --preferences-icon-background: var(--neutral-3);
+  --preferences-border: var(--neutral-4);
+  --preferences-selected: var(--solid-blue);
+}
+
+:root[data-theme="dark"] {
+  --preferences-background: var(--neutral-9);
+  --preferences-icon-background: var(--neutral-7);
+  --preferences-border: var(--neutral-6);
+  --preferences-selected: var(--solid-darkblue);
+}
+
+.preferencesDetails {
+  background-color: var(--preferences-background);
+  color: var(--text-base);
+  width: 100%;
+  margin-bottom: var(--spacing-10);
+  padding-block: var(--spacing-4);
+  border: 1px solid var(--preferences-border);
+  border-radius: var(--spacing-2);
+}
+
+.preferencesDetails:focus-within {
+  outline: 2px solid var(--preferences-border);
+}
+
+.preferencesDetails summary {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+  cursor: pointer;
+  padding-inline: var(--spacing-4);
+  outline: none;
+}
+
+.summaryContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.preferencesDetails[open] .chevron {
+  transform: rotate(90deg);
+}
+
+.chevron {
+  width: 24px;
+  height: 24px;
+  color: var(--neutral-5);
+  transform: rotate(0);
+  transition: transform 0.15s ease;
+}
+
+.iconBackground {
+  padding: var(--spacing-1);
+  background-color: var(--preferences-icon-background);
+  border-radius: var(--spacing-2);
+}
+
+.preferencesDetails summary::-webkit-details-marker {
+  display: none;
+}
+
+.preferencesDivider {
+  border-top: 1px solid var(--preferences-border);
+  margin-top: var(--spacing-4);
+  padding-top: var(--spacing-4);
+  padding-inline: var(--spacing-4);
+}
+
+.radioLabel {
+  font-size: var(--text-sm);
+}
+
+.groupContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+  margin-block: var(--spacing-4);
+}
+
+.groupContainer label {
+  text-transform: capitalize;
+  font-size: var(--text-sm);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex: 1;
+  min-width: 100px;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2);
+  border: 1px solid var(--preferences-border);
+  border-radius: var(--spacing-1);
+  cursor: pointer;
+}
+
+.groupContainer label:focus-within {
+  outline: 2px solid var(--preferences-selected);
+}
+
+.groupContainer div {
+  flex-shrink: 0;
+}
+
+.groupContainer label.selected {
+  border-color: var(--preferences-selected);
 }

@@ -1,0 +1,12 @@
+---
+import CodeSample from "./CodeSample.tsx";
+---
+
+<CodeSample client:only>
+  <p slot="js">
+    <slot name="js" />
+  </p>
+  <p slot="ts">
+    <slot name="ts" />
+  </p>
+</CodeSample>

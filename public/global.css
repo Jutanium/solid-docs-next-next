@@ -183,7 +183,7 @@ h6 {
 	--text-xs: 0.75rem;
 	--text-sm: 0.875rem;
 	--text-default: 1rem;
-	--text-lg:: 1.125rem;
+	--text-lg: 1.125rem;
 	--text-xl: 1.25rem;
 	--text-2xl: 1.5rem;
 	--text-3xl: 2.25rem;
@@ -263,14 +263,23 @@ body {
 	color: var(--text-links);
 }
 
+.prose aside a {
+	--text-links: var(--solid-lightblue);
+	--text-links-hover: var(--solid-blue);
+}
+
 .prose a:is(:hover, :focus) {
 	color: var(--text-links-hover);
 }
 
-.prose :not(pre) code {
+.prose code {
 	padding: var(--spacing-0-5);
 	background-color: rgb(203 213 225 / 0.2);
 	border-radius: var(--spacing-1-5);
+}
+
+.prose pre code {
+  background: none;
 }
 
 .prose pre {
