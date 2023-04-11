@@ -1,5 +1,6 @@
 ---
 import { getSidebarEntries } from "../sidebar";
+import Preferences from "~/components/Preferences/Preferences.tsx";
 
 interface Props {
   currentPage: string;
@@ -10,6 +11,7 @@ const sidebar = getSidebarEntries();
 ---
 
 <nav aria-label="Primary">
+  <Preferences client:load />
   {
     sidebar.map(({ header, depth, children }) => (
       <>
@@ -42,6 +44,7 @@ const sidebar = getSidebarEntries();
     padding: var(--spacing-7);
     height: calc(100vh - var(--header-height));
     overflow-y: auto;
+    scrollbar-gutter: stable;
   }
 
   nav h2 {
@@ -85,11 +88,13 @@ const sidebar = getSidebarEntries();
     color: var(--solid-blue);
   }
 
+  nav h2,
+  li a {
+    transition: color 0.15s ease;
+  }
+
   nav h2:hover,
   li a:hover {
     color: var(--gray-4);
-    transition: color;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 0.15s;
   }
 </style>

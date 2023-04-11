@@ -14,48 +14,48 @@ import type { JSX } from "solid-js/types/jsx";
 export type asideType = "vue" | "react" | "angular" | "svelte" | "note" | "warning" | "tip" |"advanced";
 
 export interface Props {
-	type: asideType;
-	title?: string;
+  type: asideType;
+  title?: string;
 }
 
 const asides: {
-	[key in asideType]: {
-		title: string;
-		logo: typeof IconBrain;
-	};
+  [key in asideType]: {
+    title: string;
+    logo: typeof IconBrain;
+  };
 } = {
-	vue: {
-		title: "Since you're coming from Vue",
-		logo: IconVue,
-	},
-	react: {
-		title: "Since you're coming from React",
-		logo: IconReact,
-	},
-	angular: {
-		title: "Since you're coming from Angular",
-		logo: IconAngular,
-	},
-	svelte: {
-		title: "Since you're coming from Svelte",
-		logo: IconSvelte,
-	},
-	note: {
-		title: "Note",
-		logo: IconBulb,
-	},
-	warning: {
-		title: "Warning",
-		logo: IconAlertDecagram,
-	},
-	tip: {
-		title: "Tip",
-		logo: IconPencil,
-	},
-	advanced: {
-		title: "Advanced",
-		logo: IconBrain,
-	},
+  vue: {
+    title: "Since you're coming from Vue",
+    logo: IconVue,
+  },
+  react: {
+    title: "Since you're coming from React",
+    logo: IconReact,
+  },
+  angular: {
+    title: "Since you're coming from Angular",
+    logo: IconAngular,
+  },
+  svelte: {
+    title: "Since you're coming from Svelte",
+    logo: IconSvelte,
+  },
+  note: {
+    title: "Note",
+    logo: IconBulb,
+  },
+  warning: {
+    title: "Warning",
+    logo: IconAlertDecagram,
+  },
+  tip: {
+    title: "Tip",
+    logo: IconPencil,
+  },
+  advanced: {
+    title: "Advanced",
+    logo: IconBrain,
+  },
 };
 
 const { type, title } = Astro.props as Props;
@@ -64,22 +64,29 @@ const Logo = asides[type].logo;
 ---
 
 <aside>
-	<header>
-		<Logo />
-		{title || asides[type].title}
-	</header>
-	<slot />
+  <p class="title">
+    <Logo aria-hidden="true" />
+    {title || asides[type].title}
+  </p>
+  <div class="aside-content">
+    <slot />
+  </div>
 </aside>
 
 <style>
-	aside {
-		background-color: var(--solid-darkblue);
-		color: var(--white);
-	}
+  aside {
+    background-color: var(--solid-darkblue);
+    color: var(--white);
+    padding: var(--spacing-4);
+    border-radius: var(--spacing-2);
+  }
 
-	header {
-		display: flex;
-		align-items: center;
-		font-weight: bold;
-	}
+  p.title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--spacing-2);
+    margin: 0;
+    font-weight: 600;
+  }
 </style>
