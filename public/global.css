@@ -263,14 +263,23 @@ body {
 	color: var(--text-links);
 }
 
+.prose aside a {
+	--text-links: var(--solid-lightblue);
+	--text-links-hover: var(--solid-blue);
+}
+
 .prose a:is(:hover, :focus) {
 	color: var(--text-links-hover);
 }
 
-.prose :not(pre) code {
+.prose code {
 	padding: var(--spacing-0-5);
 	background-color: rgb(203 213 225 / 0.2);
 	border-radius: var(--spacing-1-5);
+}
+
+.prose pre code {
+  background: none;
 }
 
 .prose pre {

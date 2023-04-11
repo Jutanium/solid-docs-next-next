@@ -4,7 +4,7 @@ active: true
 ---
 
 import Preferences from "~/components/Preferences/Preferences.tsx";
-import CodeSample from "~/components/CodeSample.astro";
+import CodeSample from "~/components/CodeSample/CodeSample.astro";
 import Aside from "~/components/Aside.astro";
 import FrameworkAside from "~/components/FrameworkAside.astro";
 
@@ -13,37 +13,37 @@ Testing tutorial components...
 <Preferences client:load />
 
 <Aside type="note">
-	Testing <b>stuff</b> in <a href="http://google.com">here</a>!
+  Testing <b>stuff</b> in <a href="http://google.com">here</a>!
 </Aside>
 
 Automatically switches depending on the framework selected in preferences:
 
 <FrameworkAside>
-	<p slot="vue">Here's a hint about Vue!</p>
-	<p slot="svelte">Here's a hint about Svelte!</p>
-	<p slot="react">Here's a hint about React!</p>
-	<p slot="angular">Here's a hint about Angular!</p>
+  <p slot="vue">Here's a hint about Vue!</p>
+  <p slot="svelte">Here's a hint about Svelte!</p>
+  <p slot="react">Here's a hint about React!</p>
+  <p slot="angular">Here's a hint about Angular!</p>
 </FrameworkAside>
 
 <CodeSample>
 	<p slot="js">
-		```js
-			export function HelloWorld() {
-				const name = "Solid";
-				const style = { "background-color": "#2c4f7c", color: "#FFF" };
-				return <div style={style}>Hello {name}!</div>;
-			}
-			```
+	```js
+	export function HelloWorld() {
+	  const name = "Solid";
+	  const style = { "background-color": "#2c4f7c", color: "#FFF" };
+	  return <div style={style}>Hello {name}!</div>;
+	}
+	```
 	</p>
 
     <p slot="ts">
-    	```js
-    		console.log("hi ts");
-    		console.log("hi ts");
-    		console.log("hi ts");
-    		console.log("hi ts");
-    		console.log("hi ts");
-    	```
+    ```js
+    console.log("hi ts");
+    console.log("hi ts");
+    console.log("hi ts");
+    console.log("hi ts");
+    console.log("hi ts");
+    ```
     </p>
 
 </CodeSample>

@@ -1,0 +1,42 @@
+.codeSample {
+  margin-block: var(--spacing-5);
+  --javascript-background: #f7df1e;
+  --typescript-background: #3178c6;
+}
+
+.codeSample [role="tablist"] {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: var(--spacing-1);
+  margin-bottom: var(--spacing-4);
+}
+
+.codeSample astro-slot p {
+  margin: 0;
+}
+
+.codeSample pre {
+  margin-top: 0;
+}
+
+.codeSample button {
+  color: var(--text-base);
+  font-weight: 700;
+  padding-inline: var(--spacing-3);
+  padding-block: var(--spacing-2);
+  background: transparent;
+  border: 0;
+  border-radius: var(--spacing-1);
+  cursor: pointer;
+}
+
+.codeSample button[aria-selected="true"][data-key="js"] {
+  color: var(--black);
+  background-color: var(--javascript-background);
+}
+
+.codeSample button[aria-selected="true"][data-key="ts"] {
+  background-color: var(--typescript-background);
+  color: var(--white);
+}

@@ -1,5 +1,6 @@
 ---
 import { sidebar } from "../sidebar";
+import Preferences from "~/components/Preferences/Preferences.tsx";
 
 interface Props {
   currentPage: string;
@@ -9,6 +10,7 @@ const { currentPage } = Astro.props;
 ---
 
 <nav aria-label="Primary">
+  <Preferences client:load />
   {
     Object.entries(sidebar).map(([header, children]) => (
       <>
@@ -39,6 +41,7 @@ const { currentPage } = Astro.props;
     padding: var(--spacing-7);
     height: calc(100vh - var(--header-height));
     overflow-y: auto;
+    scrollbar-gutter: stable;
   }
 
   nav h2 {
@@ -68,10 +71,13 @@ const { currentPage } = Astro.props;
     color: var(--solid-blue);
   }
 
-  nav h2:hover, li a:hover {
+  nav h2,
+  li a {
+    transition: color 0.15s ease;
+  }
+
+  nav h2:hover,
+  li a:hover {
     color: var(--gray-4);
-    transition: color;
-    transition-timing-function: cubic-bezier(.4,0,.2,1);
-    transition-duration: .15s;
   }
 </style>
