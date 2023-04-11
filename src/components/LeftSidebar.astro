@@ -1,5 +1,5 @@
 ---
-import { sidebar } from "../sidebar";
+import { getSidebarEntries } from "../sidebar";
 import Preferences from "~/components/Preferences/Preferences.tsx";
 
 interface Props {
@@ -7,28 +7,31 @@ interface Props {
 }
 
 const { currentPage } = Astro.props;
+const sidebar = getSidebarEntries();
 ---
 
 <nav aria-label="Primary">
   <Preferences client:load />
   {
-    Object.entries(sidebar).map(([header, children]) => (
+    sidebar.map(({ header, depth, children }) => (
       <>
-        <h2 class="divider">{header}</h2>
-        <ul>
-          {children.map(({ slug, text }) => {
-            return (
-              <li>
-                <a
-                  href={`${Astro.site?.pathname}${slug}/`}
-                  aria-current={currentPage.includes(slug) ? "page" : false}
-                >
-                  {text}
-                </a>
-              </li>
-            );
-          })}
-        </ul>
+        {depth == 1 ? <h2 class="divider">{header}</h2> : <h3>{header}</h3>}
+        {children !== null && (
+          <ul>
+            {children.map(({ slug, text }) => {
+              return (
+                <li data-depth={depth}>
+                  <a
+                    href={`${Astro.site?.pathname}${slug}/`}
+                    aria-current={currentPage.includes(slug) ? "page" : false}
+                  >
+                    {text}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        )}
       </>
     ))
   }
@@ -51,6 +54,12 @@ const { currentPage } = Astro.props;
     padding-bottom: var(--spacing-2);
   }
 
+  nav h3 {
+    color: var(--text-secondary);
+    font-size: var(--text-lg);
+    font-weight: 700;
+  }
+
   nav ul {
     padding: 0;
     margin-bottom: var(--spacing-8);
@@ -64,7 +73,15 @@ const { currentPage } = Astro.props;
   li a {
     color: var(--text-secondary);
     text-decoration: none;
+  }
+
+  li[data-depth="1"] a {
     font-weight: 600;
+  }
+
+  li[data-depth="2"] a {
+    font-size: var(--text-sm);
+    margin-left: var(--spacing-6);
   }
 
   li a[aria-current="page"] {
