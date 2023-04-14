@@ -123,4 +123,40 @@ const currentPage = Astro.url.pathname;
 
   document.documentElement.setAttribute("data-theme", theme);
   window.localStorage.setItem("theme", theme);
+
+  // Copy code blocks to clipboard
+  let copyButtonLabel = "Copy Code";
+  let codeBlocks = Array.from(document.querySelectorAll("pre"));
+
+  async function copyCode(block, button) {
+    let code = block.querySelector("code");
+    let text = code.innerText;
+
+    await navigator.clipboard.writeText(text);
+
+    button.innerText = "Copied!";
+
+    setTimeout(() => {
+      button.innerText = copyButtonLabel;
+    }, 1000);
+  }
+
+  for (let codeBlock of codeBlocks) {
+    let wrapper = document.createElement("div");
+    wrapper.style.position = "relative";
+
+    let copyButton = document.createElement("button");
+    copyButton.className = "copy-code";
+    copyButton.innerHTML = copyButtonLabel;
+
+    codeBlock.setAttribute("tabindex", "0");
+    codeBlock.appendChild(copyButton);
+    // wrap codebock with relative parent element
+    codeBlock.parentNode.insertBefore(wrapper, codeBlock);
+    wrapper.appendChild(codeBlock);
+
+    copyButton.addEventListener("click", async () => {
+      await copyCode(codeBlock, copyButton);
+    });
+  }
 </script>
