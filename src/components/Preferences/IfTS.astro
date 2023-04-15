@@ -1,0 +1,21 @@
+---
+import IfTS from "./IfTS.tsx";
+import { Code } from "astro/components";
+
+export interface Props {
+  js?: string;
+  code?: boolean;
+}
+
+const { js, code } = Astro.props;
+
+const ts = await Astro.slots.render("default");
+console.log(ts);
+---
+
+<IfTS client:load>
+  <span slot="fallback">
+    {code && js ? <code>{js}</code> : js}
+  </span>
+  {code && ts ? <code>{ts}</code> : ts}
+</IfTS>

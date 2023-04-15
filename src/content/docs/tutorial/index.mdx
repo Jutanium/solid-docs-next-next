@@ -1,6 +1,6 @@
 ---
 title: Beginner Tutorial
-active: true
+draft: false
 ---
 
 import Preferences from "~/components/Preferences/Preferences.tsx";
@@ -13,16 +13,16 @@ Testing tutorial components...
 <Preferences client:load />
 
 <Aside type="note">
-  Testing <b>stuff</b> in <a href="http://google.com">here</a>!
+	Testing <b>stuff</b> in <a href="http://google.com">here</a>!
 </Aside>
 
 Automatically switches depending on the framework selected in preferences:
 
 <FrameworkAside>
-  <p slot="vue">Here's a hint about Vue!</p>
-  <p slot="svelte">Here's a hint about Svelte!</p>
-  <p slot="react">Here's a hint about React!</p>
-  <p slot="angular">Here's a hint about Angular!</p>
+	<p slot="vue">Here's a hint about Vue!</p>
+	<p slot="svelte">Here's a hint about Svelte!</p>
+	<p slot="react">Here's a hint about React!</p>
+	<p slot="angular">Here's a hint about Angular!</p>
 </FrameworkAside>
 
 <CodeSample>
