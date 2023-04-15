@@ -8,12 +8,14 @@ type GeneratedSidebar = {
 }[];
 
 export const sidebar: Sidebar = {
-  "Getting Started": [
-    { text: "What is Solid?", slug: "getting-started/what-is-solid" },
-  ],
-  "Core Concepts": [
-    { text: "Head and metadata", slug: "core-concepts/head-metadata" },
-  ],
+  "Start Here": [{ text: "What is Solid?", slug: "start-here" }],
+  Tutorials: {
+    "Getting Started with Solid": [
+      { text: "Introduction", slug: "tutorial" },
+      { text: "Installing Solid", slug: "tutorial/installing-solid" },
+    ],
+  },
+  "Core Concepts": [],
   "API Reference": {
     Router: [
       { text: "A", slug: "api/a" },

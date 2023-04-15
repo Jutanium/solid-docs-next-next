@@ -23,7 +23,9 @@ const sidebar = getSidebarEntries();
                 <li data-depth={depth}>
                   <a
                     href={`${Astro.site?.pathname}${slug}/`}
-                    aria-current={currentPage.includes(slug) ? "page" : false}
+                    aria-current={
+                      currentPage.endsWith(slug + "/") ? "page" : false
+                    }
                   >
                     {text}
                   </a>
