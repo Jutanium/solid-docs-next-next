@@ -1,0 +1,33 @@
+---
+import IconClipboard from "~icons/heroicons-solid/clipboard-document";
+
+const codeSnippetHtml = await Astro.slots.render('default');
+---
+<div>
+    <button class="copy-code">
+        <IconClipboard class="icon" width="24" height="24" />
+    </button>
+    <Fragment set:html={codeSnippetHtml} />
+</div>
+
+<style>
+    div {
+        position: relative;
+    }
+
+    .copy-code {
+        z-index: 10;
+        position: absolute;
+        top: 0;
+        right: 0;
+        border: 0;
+        padding: var(--spacing-4);
+        background: none;
+        /*background-color: var(--solid-blue); */
+        cursor: pointer;
+    }
+
+    .icon {
+        color: var(--white);
+    }
+</style>
