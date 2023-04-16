@@ -1,33 +1,110 @@
 ---
 import IconClipboard from "~icons/heroicons-solid/clipboard-document";
+import IconClipboardChecked from "~icons/heroicons-solid/clipboard-document-check";
 
-const codeSnippetHtml = await Astro.slots.render('default');
+interface Props {
+  title?: string;
+  code?: string;
+}
+
+const { title = "", code = "" } = Astro.props;
+
+// Generate HTML code from the title (if any), improving the ability to wrap long file paths
+// into multiple lines by inserting a line break opportunity after each slash
+const titleHtml = decodeURIComponent(title).replace(/([\\/])/g, "$1<wbr/>");
+
+const codeSnippetHtml = await Astro.slots.render("default");
 ---
-<div>
-    <button class="copy-code">
-        <IconClipboard class="icon" width="24" height="24" />
+
+<figure>
+  <figcaption>
+    <span class="title" set:html={titleHtml} />
+    <button
+      data-state="copy"
+      data-code={code}
+      data-copy-button
+      title="Copy to clipboard"
+    >
+      <IconClipboard
+        data-copy
+        aria-hidden="true"
+        class="icon"
+        width="24"
+        height="24"
+      />
+      <IconClipboardChecked
+        data-copied
+        aria-hidden="true"
+        class="icon"
+        width="24"
+        height="24"
+      />
     </button>
-    <Fragment set:html={codeSnippetHtml} />
-</div>
-
+  </figcaption>
+  <Fragment set:html={codeSnippetHtml} />
+</figure>
 <style>
-    div {
-        position: relative;
-    }
+  :root {
+    --code-header-background: var(--gray-7);
+  }
 
-    .copy-code {
-        z-index: 10;
-        position: absolute;
-        top: 0;
-        right: 0;
-        border: 0;
-        padding: var(--spacing-4);
-        background: none;
-        /*background-color: var(--solid-blue); */
-        cursor: pointer;
-    }
+  :root[data-theme="dark"] {
+    --code-header-background: var(--neutral-7);
+  }
 
-    .icon {
-        color: var(--white);
-    }
+  figcaption {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: var(--spacing-3);
+    padding-block: var(--spacing-0-5);
+    padding-left: var(--spacing-4);
+    padding-right: var(--spacing-2);
+    background-color: var(--code-header-background);
+    color: var(--white);
+  }
+
+  button {
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  button:not([data-state="copied"]) [data-copied] {
+    display: none;
+  }
+
+  button:not([data-state="copy"]) [data-copy] {
+    display: none;
+  }
+
+  button .icon {
+    color: var(--white);
+  }
+
+  .title {
+    font-size: var(--text-xs);
+  }
 </style>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLElement>("[data-copy-button]");
+  buttons.forEach((button) => {
+    if (button.dataset.code) {
+      const code = decodeURIComponent(button.dataset.code);
+
+      button.addEventListener("click", async () => {
+        button.dataset.state = "copied";
+        button.title = "Copied";
+        await navigator.clipboard.writeText(code);
+
+        setTimeout(() => {
+          button.dataset.state = "copy";
+          button.title = "Copy to clipboard";
+        }, 1500);
+      });
+    }
+  });
+</script>
