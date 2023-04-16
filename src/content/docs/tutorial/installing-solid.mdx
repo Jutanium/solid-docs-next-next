@@ -42,10 +42,49 @@ For this tutorial, it isn't important whether you choose the JavaScript or the T
 
 ## Understanding the Project Structure
 
-## JavaScript vs TypeScript
-
-
 These templates set up a project with many files, but it isn't important to understand them all now. We'll guide you through files as you need them.
+
+<CodeSample>
+	<p slot="js">
+```
+my-app
+├── README.md
+├── index.html
+├── jsconfig.json
+├── package.json
+├── pnpm-lock.yaml
+├── src
+│   ├── App.jsx
+│   ├── App.module.css
+│   ├── assets
+│   │   └── favicon.ico
+│   ├── index.css
+│   ├── index.jsx
+│   └── logo.svg
+└── vite.config.js
+```
+	</p>
+	<p slot="ts">
+```
+my-app
+├── README.md
+├── index.html
+├── package.json
+├── pnpm-lock.yaml
+├── src
+│   ├── App.module.css
+│   ├── App.tsx
+│   ├── assets
+│   │   └── favicon.ico
+│   ├── index.css
+│   ├── index.tsx
+│   └── logo.svg
+├── tsconfig.json
+└── vite.config.ts
+```
+	</p>
+</CodeSample>
+
 For now, here are the basics:
 
 - We're using [Vite](https://vitejs.dev/) to run our code. Vite is a tool that allows us to import one file from another and use plugins to improve the development experience. When we're ready to deploy our app, Vite bundles our code. 
@@ -53,4 +92,6 @@ The <IfTS code js="vite.config.js">vite.config.ts</IfTS> file configures the Vit
 - Everything we'll be doing in this tutorial takes place in the `src` folder.
 - The starting point for our site is `index.html`. This provides a basic HTML skeleton, and links to <IfTS code js="src/index.jsx">src/index.tsx</IfTS>.
 - <IfTS code js="src/index.jsx">src/index.tsx</IfTS> is the starting point for our Solid app. 
-This in turn imports <IfTS code js="src/App.jsx">src/App.tsx</IfTS>, which is our first component. We'll discuss components next!
+This in turn imports <IfTS code js="src/App.jsx">src/App.tsx</IfTS>, which is our first component.
+
+We'll discuss components next.

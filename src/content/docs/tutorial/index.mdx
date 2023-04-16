@@ -8,42 +8,57 @@ import CodeSample from "~/components/CodeSample/CodeSample.astro";
 import Aside from "~/components/Aside.astro";
 import FrameworkAside from "~/components/FrameworkAside.astro";
 
-Testing tutorial components...
+# Welcome
 
-<Preferences client:load />
+Welcome to the Solid tutorial! In this tutorial, you'll learn Solid by doing.
 
-<Aside type="note">
-	Testing <b>stuff</b> in <a href="http://google.com">here</a>!
+We'll build an app and explore Solid along the way. We'll be building a "bookshelf" that lets you search a library database and add books to a list.
+
+{/* <FinishedBookshelf name="Ryan" /> */}
+
+## What is Solid?
+
+Solid is a JavaScript framework for making interactive web applications. With Solid, you can use your existing HTML and JavaScript knowledge to build components that can be reused throughout your app. Solid provides the tools to enhance your components with reactivity: declarative JavaScript code that links the user interface with the data that it uses and creates.
+
+## Prerequisites
+
+Before digging into Solid, we recommend you have some experience building websites and a working understanding of HTML, CSS, and JavaScript.
+
+<Aside>
+  Check out [JavaScript for
+  Solid](/guides/foundations/javascript-for-solid) if you need a
+  refresher on JavaScript concepts we frequently use in Solid.
 </Aside>
 
-Automatically switches depending on the framework selected in preferences:
+## Tell us a little about yourself
 
-<FrameworkAside>
-	<p slot="vue">Here's a hint about Vue!</p>
-	<p slot="svelte">Here's a hint about Svelte!</p>
-	<p slot="react">Here's a hint about React!</p>
-	<p slot="angular">Here's a hint about Angular!</p>
+Before we get started, we'd like to know a little about you! By telling us your language preference and if you're coming from another framework, we'll be able to tailor this tutorial to match your experience as best we can.
+
+<Preferences id="content-1" isForContent={true} />
+
+<FrameworkAside framework="react">
+  As you go through the tutorial, we'll give you helpful hints in informational
+  boxes just like this one that relate Solid with React principles and
+  practices.
 </FrameworkAside>
 
-<CodeSample>
-	<p slot="js">
-	```js
-	export function HelloWorld() {
-	  const name = "Solid";
-	  const style = { "background-color": "#2c4f7c", color: "#FFF" };
-	  return <div style={style}>Hello {name}!</div>;
-	}
-	```
-	</p>
+<FrameworkAside framework="svelte">
+  As you go through the tutorial, we'll give you helpful hints in informational
+  boxes just like this one that relate Solid with Svelte principles and
+  practices.
+</FrameworkAside>
 
-    <p slot="ts">
-    ```js
-    console.log("hi ts");
-    console.log("hi ts");
-    console.log("hi ts");
-    console.log("hi ts");
-    console.log("hi ts");
-    ```
-    </p>
+<FrameworkAside framework="vue">
+  As you go through the tutorial, we'll give you helpful hints in informational
+  boxes just like this one that relate Solid with Vue principles and practices.
+</FrameworkAside>
 
-</CodeSample>
+<FrameworkAside framework="angular">
+  As you go through the tutorial, we'll give you helpful hints in informational
+  boxes just like this one that relate Solid with Angular principles and
+  practices.
+</FrameworkAside>
+
+## Need help?
+
+If you ever need help along the way, [don't hesitate to reach out to the Solid team on Discord!](https://discord.com/invite/solidjs) Chances are that if something in this tutorial is unclear to you, then it's likely unclear to others as well. By reaching out to us, you'll be helping improve the learning experience of others as well.

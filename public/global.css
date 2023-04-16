@@ -225,7 +225,7 @@ body {
 
 .divider,
 .prose :is(h1, h2) {
-  line-height: 1.1111111;
+  line-height: 0.5;
   border-bottom: 1px solid var(--outline-headings);
   padding-bottom: var(--spacing-4);
   margin-bottom: var(--spacing-6);

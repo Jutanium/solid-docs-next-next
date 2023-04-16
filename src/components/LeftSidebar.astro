@@ -1,13 +1,23 @@
 ---
 import { getSidebarEntries } from "../sidebar";
+import type { SidebarEntry } from "../sidebar";
 import Preferences from "~/components/Preferences/Preferences.tsx";
 
-interface Props {
+export interface Props {
   currentPage: string;
 }
 
 const { currentPage } = Astro.props;
 const sidebar = getSidebarEntries();
+console.log(sidebar);
+
+function isCurrent(slug: string) {
+  return currentPage.replace(/\/$/, "").endsWith(slug);
+}
+
+function routeIncludesChild(children: SidebarEntry[]) {
+  return children.some((child) => isCurrent(child.slug));
+}
 ---
 
 <nav aria-label="Primary">
@@ -15,15 +25,21 @@ const sidebar = getSidebarEntries();
   {
     sidebar.map(({ header, depth, children }) => (
       <>
-        {depth == 1 ? <h2 class="divider">{header}</h2> : <h3>{header}</h3>}
-        {children !== null && (
+        {depth == 1 ? (
+          <h2>{header}</h2>
+        ) : (
+          <h3>
+            <a href={"/" + children[0]?.slug}>{header}</a>
+          </h3>
+        )}
+        {children.length && (depth === 1 || routeIncludesChild(children)) ? (
           <ul>
             {children.map(({ slug, text }) => {
               return (
                 <li data-depth={depth}>
                   <a
                     href={`${Astro.site?.pathname}${slug}/`}
-                    aria-current={currentPage.includes(slug) ? "page" : false}
+                    aria-current={isCurrent(slug) ? "page" : false}
                   >
                     {text}
                   </a>
@@ -31,7 +47,7 @@ const sidebar = getSidebarEntries();
               );
             })}
           </ul>
-        )}
+        ) : null}
       </>
     ))
   }
@@ -66,11 +82,15 @@ const sidebar = getSidebarEntries();
     list-style-type: none;
   }
 
+  h3 + h2 {
+    margin-top: var(--spacing-8);
+  }
+
   nav li {
     padding-block: var(--spacing-1);
   }
 
-  li a {
+  a {
     color: var(--text-secondary);
     text-decoration: none;
   }
@@ -84,7 +104,7 @@ const sidebar = getSidebarEntries();
     margin-left: var(--spacing-6);
   }
 
-  li a[aria-current="page"] {
+  a[aria-current="page"] {
     color: var(--solid-blue);
   }
 
@@ -93,8 +113,7 @@ const sidebar = getSidebarEntries();
     transition: color 0.15s ease;
   }
 
-  nav h2:hover,
-  li a:hover {
+  a:hover {
     color: var(--gray-4);
   }
 </style>

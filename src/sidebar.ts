@@ -1,19 +1,24 @@
-type SidebarEntry = { text: string; slug: string };
+export type SidebarEntry = { text: string; slug: string };
 type Sidebar = Record<string, SidebarEntry[] | Record<string, SidebarEntry[]>>;
 
 type GeneratedSidebar = {
   header: string;
   depth: number;
-  children: SidebarEntry[] | null;
+  children: SidebarEntry[];
 }[];
 
 export const sidebar: Sidebar = {
-  "Getting Started": [
-    { text: "What is Solid?", slug: "getting-started/what-is-solid" },
+  "Start Here": [
+    { text: "Welcome", slug: "start-here" },
+    { text: "JavaScript for Solid", slug: "start-here/js-for-solid" },
   ],
-  "Core Concepts": [
-    { text: "Head and metadata", slug: "core-concepts/head-metadata" },
-  ],
+  Tutorials: {
+    "Getting Started with Solid": [
+      { text: "Introduction", slug: "tutorial" },
+      { text: "Installing Solid", slug: "tutorial/installing-solid" },
+    ],
+  },
+  "Core Concepts": [],
   "API Reference": {
     Router: [
       { text: "A", slug: "api/a" },
@@ -37,7 +42,7 @@ export function getSidebarEntries() {
       entries.push({
         header: header,
         depth: 1,
-        children: null,
+        children: [],
       });
 
       Object.entries(items).map(([header, entry]) => {
