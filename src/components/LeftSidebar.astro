@@ -9,7 +9,6 @@ export interface Props {
 
 const { currentPage } = Astro.props;
 const sidebar = getSidebarEntries();
-console.log(sidebar);
 
 function isCurrent(slug: string) {
   return currentPage.replace(/\/$/, "").endsWith(slug);
