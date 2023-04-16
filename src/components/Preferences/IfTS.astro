@@ -10,7 +10,6 @@ export interface Props {
 const { js, code } = Astro.props;
 
 const ts = await Astro.slots.render("default");
-console.log(ts);
 ---
 
 <IfTS client:load>

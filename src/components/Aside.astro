@@ -58,7 +58,7 @@ const asides: {
   },
 };
 
-const { type, title } = Astro.props as Props;
+const { type = "note", title } = Astro.props as Props;
 
 const Logo = asides[type].logo;
 ---
