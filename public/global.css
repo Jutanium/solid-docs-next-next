@@ -292,7 +292,6 @@ body {
 .prose pre {
   /* Override github-dark default background */
   background-color: var(--text-code) !important;
-  margin-top: var(--spacing-3);
   margin-bottom: var(--spacing-7);
   padding: var(--spacing-4) var(--spacing-3-5);
 }
