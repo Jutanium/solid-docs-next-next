@@ -21,11 +21,11 @@
 		"unplugin-icons": "^0.16.1"
 	},
 	"devDependencies": {
-		"astro-auto-import": "^0.2.1",
 		"@iconify/json": "^2.2.47",
+		"@types/mdast": "^3.0.10",
 		"@typescript-eslint/eslint-plugin": "^5.57.1",
 		"@typescript-eslint/parser": "^5.57.1",
-		"@types/mdast": "^3.0.10",
+		"astro-auto-import": "^0.2.1",
 		"eslint": "^8.38.0",
 		"eslint-plugin-astro": "^0.26.1",
 		"eslint-plugin-jsx-a11y": "^6.7.1",

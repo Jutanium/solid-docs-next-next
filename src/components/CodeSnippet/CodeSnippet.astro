@@ -20,6 +20,7 @@ const codeSnippetHtml = await Astro.slots.render("default");
   <figcaption>
     <span class="title" set:html={titleHtml} />
     <button
+      onclick="copyToClipboard(this)"
       data-state="copy"
       data-code={code}
       data-copy-button
@@ -88,23 +89,3 @@ const codeSnippetHtml = await Astro.slots.render("default");
     font-size: var(--text-xs);
   }
 </style>
-
-<script>
-  const buttons = document.querySelectorAll<HTMLElement>("[data-copy-button]");
-  buttons.forEach((button) => {
-    if (button.dataset.code) {
-      const code = decodeURIComponent(button.dataset.code);
-
-      button.addEventListener("click", async () => {
-        button.dataset.state = "copied";
-        button.title = "Copied";
-        await navigator.clipboard.writeText(code);
-
-        setTimeout(() => {
-          button.dataset.state = "copy";
-          button.title = "Copy to clipboard";
-        }, 1500);
-      });
-    }
-  });
-</script>

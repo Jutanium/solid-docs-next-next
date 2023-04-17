@@ -39,6 +39,20 @@ const currentPage = Astro.url.pathname;
 
       document.documentElement.setAttribute("data-theme", theme);
       window.localStorage.setItem("theme", theme);
+
+      const copyToClipboard = (button) => {
+        if (button.dataset.code) {
+          const code = decodeURIComponent(button.dataset.code);
+          button.dataset.state = "copied";
+          button.title = "Copied";
+          navigator.clipboard.writeText(code);
+
+          setTimeout(() => {
+            button.dataset.state = "copy";
+            button.title = "Copy to clipboard";
+          }, 1500);
+        }
+      };
     </script>
   </head>
   <body>

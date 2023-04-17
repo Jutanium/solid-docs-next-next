@@ -19,10 +19,6 @@ import styles from "./Preferences.module.css";
 const Preferences: Component = () => {
   const [{ jsTs, framework }, { setJsTs, setFramework }] = preferences;
 
-  createEffect(() => {
-    console.log(framework(), jsTs());
-  });
-
   // const [jsTs, _setJsTs] = createSignal<"js" | "ts">();
   // const [framework, _setFramework] = createSignal<framework>("none");
 
