@@ -1,9 +1,16 @@
 <div class="logo-container">
-  <img class="icon" aria-hidden="true" src="/logos/solid-icon.svg" />
+  <img
+    width="36px"
+    height="36px"
+    aria-hidden="true"
+    src="/logos/solid-icon.svg"
+  />
   <!-- Same SVG as public/logos/solid-logo.svg, needs to be used locally to react to CSS variables -->
   <svg
     aria-hidden="true"
     class="name"
+    height="42px"
+    width="185px"
     xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink"
     height="70.7"
@@ -50,11 +57,13 @@
     align-items: center;
   }
 
-  .icon {
-    height: 36px;
+  .name {
+    display: none;
   }
 
-  .name {
-    height: 42px;
+  @media (min-width: 50em) {
+    .name {
+      display: block;
+    }
   }
 </style>

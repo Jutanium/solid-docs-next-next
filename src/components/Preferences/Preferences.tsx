@@ -50,7 +50,7 @@ const Preferences: Component = () => {
       <summary>
         <div class={styles.summaryContainer}>
           <div class={styles.iconBackground}>
-            <IconGear aria-hidden />
+            <IconGear height="20px" width="20px" aria-hidden="true" />
           </div>
           Preferences
         </div>
@@ -71,7 +71,7 @@ const Preferences: Component = () => {
             >
               <RadioGroup.ItemInput />
               <RadioGroup.ItemControl>
-                <IconJs />
+                <IconJs aria-hidden="true" />
                 {/* <RadioGroup.ItemIndicator /> */}
               </RadioGroup.ItemControl>
               <RadioGroup.ItemLabel>JavaScript</RadioGroup.ItemLabel>
@@ -82,7 +82,7 @@ const Preferences: Component = () => {
             >
               <RadioGroup.ItemInput />
               <RadioGroup.ItemControl>
-                <IconTs />
+                <IconTs aria-hidden="true" />
                 {/* <RadioGroup.ItemIndicator /> */}
               </RadioGroup.ItemControl>
               <RadioGroup.ItemLabel>TypeScript</RadioGroup.ItemLabel>
@@ -105,7 +105,7 @@ const Preferences: Component = () => {
                 >
                   <RadioGroup.ItemInput />
                   <RadioGroup.ItemControl>
-                    <Dynamic component={icons[value]} />
+                    <Dynamic component={icons[value]} aria-hidden="true" />
                     {/* <RadioGroup.ItemIndicator /> */}
                   </RadioGroup.ItemControl>
                   <RadioGroup.ItemLabel>{value}</RadioGroup.ItemLabel>

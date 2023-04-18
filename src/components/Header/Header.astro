@@ -1,11 +1,15 @@
 ---
 import ThemeToggle from "./ThemeToggle";
+import MobileNavToggle from "./MobileNavToggle";
 import Logo from "./Logo.astro";
 ---
 
 <header>
   <Logo />
-  <ThemeToggle client:load />
+  <div class="right-container">
+    <ThemeToggle client:load />
+    <MobileNavToggle client:media="(max-width: 50em)" />
+  </div>
 </header>
 
 <style>
@@ -15,14 +19,21 @@ import Logo from "./Logo.astro";
 
   header {
     position: fixed;
-    padding-left: 1.5rem;
-    padding-right: 0.5rem;
+    padding-inline: var(--spacing-7);
     display: flex;
     justify-content: space-between;
+    align-items: center;
     background-color: var(--bg-base);
     width: 100%;
     height: var(--header-height);
     box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
     z-index: 999;
+  }
+
+  .right-container {
+    display: flex;
+    gap: var(--spacing-1);
+    flex-direction: row;
+    align-items: center;
   }
 </style>

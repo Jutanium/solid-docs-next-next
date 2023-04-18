@@ -1,0 +1,22 @@
+.button {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.button svg {
+  color: var(--text-base);
+}
+
+:global(.mobile-menu) .button {
+  border-color: var(--text-base);
+  border-radius: var(--spacing-1);
+}
+
+@media (max-width: 50em) {
+  .button {
+    display: inline;
+  }
+}
