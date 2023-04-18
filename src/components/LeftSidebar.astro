@@ -28,7 +28,7 @@ function routeIncludesChild(children: SidebarEntry[]) {
           <h2>{header}</h2>
         ) : (
           <h3>
-            <a href={"/" + children[0]?.slug}>{header}</a>
+            <a href={"/" + children[0]?.slug + "/"}>{header}</a>
           </h3>
         )}
         {children.length && (depth === 1 || routeIncludesChild(children)) ? (
@@ -62,20 +62,19 @@ function routeIncludesChild(children: SidebarEntry[]) {
     scrollbar-gutter: stable;
   }
 
-  nav h2 {
+  h2 {
     color: var(--text-base);
     font-size: var(--text-xl);
     font-weight: 400;
     padding-bottom: var(--spacing-2);
   }
 
-  nav h3 {
-    color: var(--text-secondary);
-    font-size: var(--text-lg);
-    font-weight: 700;
+  h3 {
+    font-size: var(--text-default);
+    font-weight: 600;
   }
 
-  nav ul {
+  ul {
     padding: 0;
     margin-bottom: var(--spacing-8);
     list-style-type: none;
@@ -85,13 +84,9 @@ function routeIncludesChild(children: SidebarEntry[]) {
     margin-top: var(--spacing-8);
   }
 
-  nav li {
+  li,
+  h3 {
     padding-block: var(--spacing-1);
-  }
-
-  a {
-    color: var(--text-secondary);
-    text-decoration: none;
   }
 
   li[data-depth="1"] a {
@@ -103,16 +98,29 @@ function routeIncludesChild(children: SidebarEntry[]) {
     margin-left: var(--spacing-6);
   }
 
+  a {
+    color: var(--text-secondary);
+    text-decoration: none;
+  }
+
   a[aria-current="page"] {
     color: var(--solid-blue);
   }
 
-  nav h2,
-  li a {
+  h2,
+  h3,
+  a {
     transition: color 0.15s ease;
   }
 
   a:hover {
     color: var(--gray-4);
+  }
+
+  @media (max-width: 50em) {
+    a {
+      display: flex;
+      width: 100%;
+    }
   }
 </style>

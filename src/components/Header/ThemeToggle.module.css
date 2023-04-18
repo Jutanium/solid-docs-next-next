@@ -5,7 +5,5 @@
 }
 
 .button svg {
-  width: 38px;
-  height: 38px;
   color: var(--text-base);
 }

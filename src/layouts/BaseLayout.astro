@@ -99,7 +99,7 @@ const currentPage = Astro.url.pathname;
     max-width: 60ch;
     margin-inline: auto;
     padding-block: var(--spacing-4);
-    padding-inline: var(--spacing-10);
+    padding-inline: var(--spacing-7);
   }
 
   aside {
@@ -111,7 +111,13 @@ const currentPage = Astro.url.pathname;
 
   .left-side {
     visibility: hidden;
-    width: var(--left-sidebar-width);
+  }
+
+  body.mobile-menu .left-side {
+    visibility: visible;
+    display: block;
+    inset-inline-end: 0;
+    width: 100%;
   }
 
   .right-side {
@@ -137,6 +143,7 @@ const currentPage = Astro.url.pathname;
 
     .left-side {
       visibility: visible;
+      width: var(--left-sidebar-width);
     }
   }
 </style>
