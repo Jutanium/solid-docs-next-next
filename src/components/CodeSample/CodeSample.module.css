@@ -4,7 +4,7 @@
   --typescript-background: #3178c6;
 }
 
-.codeSample [role="tablist"] {
+.tabList {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -20,7 +20,7 @@
   margin-top: 0;
 }
 
-.codeSample button {
+.tabList button {
   color: var(--text-base);
   font-weight: 700;
   padding-inline: var(--spacing-3);
@@ -31,12 +31,12 @@
   cursor: pointer;
 }
 
-.codeSample button[aria-selected="true"][data-key="js"] {
+.tabList button[aria-selected="true"][data-key="js"] {
   color: var(--black);
   background-color: var(--javascript-background);
 }
 
-.codeSample button[aria-selected="true"][data-key="ts"] {
+.tabList button[aria-selected="true"][data-key="ts"] {
   background-color: var(--typescript-background);
   color: var(--white);
 }

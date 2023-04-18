@@ -12,7 +12,7 @@ export default function CodeSample(props: { js: JSXElement; ts: JSXElement }) {
       value={jsTs()}
       onValueChange={(val) => setJsTs(val as "js" | "ts")}
     >
-      <Tabs.List>
+      <Tabs.List class={styles.tabList}>
         <Tabs.Trigger value="js">JS</Tabs.Trigger>
         <Tabs.Trigger value="ts">TS</Tabs.Trigger>
       </Tabs.List>

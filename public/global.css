@@ -222,12 +222,11 @@ body {
   font-size: 1rem;
   line-height: var(--spacing-7);
 }
-
 .divider,
 .prose :is(h1, h2) {
-  line-height: 0.5;
+  line-height: 1;
   border-bottom: 1px solid var(--outline-headings);
-  padding-bottom: var(--spacing-4);
+  padding-bottom: var(--spacing-2);
   margin-bottom: var(--spacing-6);
 }
 
