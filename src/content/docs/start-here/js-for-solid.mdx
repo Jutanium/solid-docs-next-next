@@ -1,11 +1,9 @@
 ---
 title: JavaScript for Solid
 ---
-Are you new to frontend frameworks or coming back to JavaScript after a few years? Here's a refresher on the most important JavaScript features and patterns you need to know. JavaScript is a flexible language and there are many approaches to writing it, so this isn't a conclusive manual for all JavaScript codebases but a "best practices" guide for working with Solid.
+Are you new to frontend frameworks or coming back to JavaScript after a few years? Here's a refresher on the JavaScript features and patterns you need to know. JavaScript is a flexible language and there are many approaches to writing it, so this isn't a conclusive manual for all JavaScript codebases. It's a "best practices" guide for working with Solid.
 
 ## Avoid these keywords
-
-When first writing modern JavaScript you might be tempted to use one of these keywords:
 
 ```js
 var, this, class
@@ -15,7 +13,7 @@ When working with Solid, it's a good idea to avoid these. You can build any Soli
 
 ## `let` and `const`
 
-Previously, you might've used `var` in JavaScript for declaring a variable. In modern JavaScript, there are two keywords for declaring variables: `let` and `const`. `const` declares a variable that won't ever be set to anything else, and `let` declares a variable that _can_ be assigned to something else.
+You may have used `var` in JavaScript for declaring a variable. In modern JavaScript, there are two keywords for declaring variables: `let` and `const`. `const` declares a variable that won't ever be set to anything else, and `let` declares a variable that _can_ be assigned to something else.
 
 ```js
 let counter = 2;
@@ -36,44 +34,44 @@ const people = [person];
 people.push({ name: "David" });
 ```
 
-When working with objects and arrays, it is far more common to use `const` than `let`, because usually you want to _mutate_ the object rather than _reassigning_ the variable.
+When working with objects and arrays, it is far more common to use `const` than `let`, because usually you want to mutate the object (`person.name = "Joe"`) rather than reassigning the variable (`person = { name: "Joe"}`).
 
-By default, use `const`. Declare it with `let` only if you find that a variable does need to be reassigned later. This makes your intention clear for your readers.
+By default, use `const`. If you find that a variable does need to be reassigned later, change it to `let`. This makes your intention clear.
 
 ## Vite and ES6 Imports
 
 Before modern toolchains for web development, you would "import" multiple JavaScript files by including `script` tags in our HTML.
 
-```html
+```html title="index.html"
 <script src="utils.js"></script>
 <script src="main.js"></script>
 ```
 
-This was tricky because you had to make sure that a file executed only after all of its dependencies were loaded&mdash;the order of the script tags mattered, and you had to declare all of this in your HTML rather than in your JavaScript where the dependencies were used.
+This was tricky because `utils.js` executed first,  so it couldn't refer to functions in `main.js`. The order of the script tags mattered. You also had to declare these scripts in your HTML rather than in your JavaScript, where they were most likely to be used.
 
-Developer tools like [Vite](https://vitejs.dev/) allow us to use a better approach to importing JavaScript. Vite is a development server and a bundling tool: it runs your code locally, providing features like automatic reloading that makes it easier to develop your project. When you're ready to deploy your site, it "builds" your code, optimizing it and splitting your JavaScript back into those many script tags.
+Developer tools like [Vite](https://vitejs.dev/) use a better approach to importing JavaScript. Vite is a development server and a bundling tool. It provides features like automatic reloading that makes it easier to develop your project. It supports the JavaScript-based [approach to imports](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) that was introduced in the ES6 version of the language.
 
-When writing Solid projects, use the JavaScript-based [approach to imports](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) that was introduced in the ES6 version of the language.
-
-```js
-//utils.js
+```js title="src/utils.js"
 function areaOfCircle(radius) {
   return Math.PI * radius ** 2;
 }
 
 export { areaOfCircle };
+```
 
-//main.js
+```js title="src/main.js"
 import { areaOfCircle } from "./utils.js";
 
 console.log(areaOfCircle(4));
 ```
 
-See the full [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export).
+When you're ready to deploy your site, Vite "builds" your code, optimizing it and splitting your JavaScript back into script tags.
+
+When writing Solid projects, use Vite. 
 
 ## Factory Functions and Closures
 
-There are many ways of doing object-oriented programming in JavaScript, but the most common you'll find alongside Solid is the technique of defining a function that returns an object.
+You can create a function that returns an object for reusable functionality and state.
 
 ```js
 function createCar(make, year) {
@@ -114,7 +112,7 @@ myCar.drive(); //Ford Fusion goes VROOM
 
 Note that the `drive` function uses the value of `make`, which was a parameter of the outer function. Later, when `myCar.drive()` is called, it "remembers" the value of `make`. This is called a _closure_ because a value outside of the function was "enclosed" with the function so that it can make use of it later on.
 
-We can use these ideas to write factories that directly return functions:
+We can also use these ideas to write factories that directly return functions:
 
 ```js
 function multiplyBy(multiplier) {
@@ -126,6 +124,137 @@ function multiplyBy(multiplier) {
 const multiplicator = multiplyBy(2);
 console.log(multiplicator(7)); //14
 ```
+
+## Getters
+
+The last example showed a `createCar` factory function. But what if it let you change the car's year?
+
+```js
+function createCar(make, year) {
+  const currentYear = new Date().getFullYear();
+  const age = currentYear - year;
+
+  function drive() {
+    console.log(make + " goes VROOM");
+  }
+
+  function setYear(newYear) {
+    year = newYear;
+  }
+
+  return {
+    make,
+    age,
+    drive,
+    setYear
+  };
+}
+
+const myCar = createCar("Ford Fusion", 2018);
+console.log(myCar.age); // 5
+myCar.setYear(2015);
+console.log(myCar.age); // 5
+```
+
+The year was updated, but the `age` wasn't. That's because the `age` calculation (`age = currentYear - year`) only happens when the `createCar` function is called. 
+
+Instead, you can make `age` a function that calculates the `age` when it is called: 
+
+```js
+function createCar(make, year) {
+  const currentYear = new Date().getFullYear();
+
+  function age () {
+    return currentYear - year;
+  }
+
+  function drive() {
+    console.log(make + " goes VROOM");
+  }
+
+  function setYear(newYear) {
+    year = newYear;
+  }
+
+  return {
+    make,
+    age,
+    drive,
+    setYear
+  };
+}
+
+const myCar = createCar("Ford Fusion", 2018);
+console.log(myCar.age()); // 5
+myCar.setYear(2015);
+console.log(myCar.age()); // 8
+```
+
+This works, but now `age` must be called as a function. Instead, we can use a [_getter_](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get): 
+
+```js
+function createCar(make, year) {
+  const currentYear = new Date().getFullYear();
+
+  function drive() {
+    console.log(make + " goes VROOM");
+  }
+
+  function setYear(newYear) {
+    year = newYear;
+  }
+
+  return {
+    make,
+    drive,
+    get age() {
+      return currentYear - year;
+    },
+    setYear
+  };
+}
+
+const myCar = createCar("Ford Fusion", 2018);
+console.log(myCar.age); // 5
+myCar.setYear(2015);
+console.log(myCar.age); // 8
+```
+
+Now, the interface is the same as if it were a normal object property, but it calculates its value on demand.
+
+Like any function, a getter can run any code. For example, we could `log` the number of times the property has been called:
+
+```js 
+function createCar(make, year) {
+  const currentYear = new Date().getFullYear();
+
+  function drive() {
+    console.log(make + " goes VROOM");
+  }
+
+  function setYear(newYear) {
+    year = newYear;
+  }
+
+  let accessed = 0;
+  return {
+    make,
+    drive,
+    get age() {
+      console.log(++accessed);
+      return currentYear - year;
+    },
+    setYear
+  };
+}
+
+const myCar = createCar("Ford Fusion", 2018);
+myCar.age; // 1
+myCar.age; // 2
+myCar.age; // 3
+```
+
+You might not write many getters, but it's important to know that a property access can have "side effects", like the console log in this example.
 
 ## Destructuring
 
@@ -142,7 +271,7 @@ function gameSetup(options) {
 }
 ```
 
-If we know that these three properties (`screenWidth`, `screenHeight`, and `multiplayer`) are present on the object, we can "destructure" it and save ourselves from repeating the name of the object:
+If you know that these three properties (`screenWidth`, `screenHeight`, and `multiplayer`) will be present on the `options` object, we can _destructure_ it to avoid repeating the name of the object:
 
 ```js
 function gameSetup(options, playersArray) {
@@ -159,7 +288,15 @@ function gameSetup(options, playersArray) {
 }
 ```
 
-We can also destructure arrays:
+You can even avoid giving the object a name in the first place:
+```js
+function gameSetup({screenWidth, screenHight, multiplayer}, playersArray) {
+  initializeScreen(screenWidth, screenHeight);
+  if (multiplayer) {
+   ...
+```
+
+You can also destructure arrays:
 
 ```js
 function gameSetup(options, playersArray) {
@@ -174,8 +311,6 @@ function gameSetup(options, playersArray) {
   startGame();
 }
 ```
-
-Destructuring lets us do a [lot of tricks](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment), and you'll see it a lot in Solid.
 
 ## Template Literals
 
@@ -238,20 +373,21 @@ const areaOfCircle = function (radius) {
 };
 ```
 
-4. [Arrow function]()
+4. [Arrow function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
 
 ```js
 const areaOfCircle = (radius) => {
   return radius * Math.PI ** 2;
 };
 
-//Or the shorthand if you only have one line of code in the function body:
+// Or the shorthand if you only have one line of code in the function body:
 const areaOfCircle = (radius) => radius * Math.PI ** 2;
 ```
 
-There are nuanced differences between these declarations - for example, add `console.log(this);` inside of each - but most are irrelevant day-to-day working with Solid (if you're curious, check out this [detailed article](https://dmitripavlutin.com/differences-between-arrow-and-regular-functions/)).
+There are nuanced differences between these declarations, but they are irrelevant for day-to-day working with Solid (if you're curious, check out this [detailed article](https://dmitripavlutin.com/differences-between-arrow-and-regular-functions/)).
 
-If you're in doubt, use an arrow function (example #4). As long as you're following the earlier advice and not using the `this` keyword, there will be no difference between an arrow function and a function expression.
+If you're in doubt, use an arrow function (example #4). As long as you're not using the `this` keyword, there will be no difference between an arrow function and a function expression.
+
 
 ## Functions as Arguments
 
@@ -267,19 +403,19 @@ function callForEach(array, func) {
 
 const myArray = ["I", "love", "Solid"];
 callForEach(myArray, console.log);
-//I
-//love
-//Solid
+// I
+// love
+// Solid
 ```
 
-Many functions that are built-in to JavaScript (and many that come with Solid) take a function argument. The above is actually built-in to JavaScript arrays:
+Many functions that are built in to JavaScript (and many that come with Solid) take a function argument. The above functionality can be found as `.forEach` on JavaScript arrays:
 
 ```js
 const myArray = ["I", "love", "Solid"];
 myArray.forEach(console.log);
-//I
-//love
-//Solid
+// I
+// love
+// Solid
 ```
 
 Another common example is the built-in `map` method. It takes as its argument a function that maps the current element of the array to a new result:
@@ -291,7 +427,7 @@ const uppercase = myArray.map(element => element.toUpperCase()) // ["I", "LOVE",
 
 ## Declarative vs Imperative Code
 
-JavaScript array methods like `map` (and others like [`reduce`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce) and [`filter`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)) can replace loops that you might make with `for` or `while`. Those traditional loop techniques are called "imperative" - they state step-by-step how to accomplish something:
+JavaScript array methods like `map` (and others like [`reduce`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce) and [`filter`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)) can replace loops that you might make with `for` or `while`. Those traditional loop techniques are "imperative". They state step-by-step how to accomplish something:
 
 ```js
 const myNumbers = [1, 2, 3, 4, 5, 11, 18, 65];
@@ -312,8 +448,8 @@ const oddNumbers = myNumbers.filter((number) => number % 2 !== 0);
 console.log(oddNumbers); // [ 1, 3, 5, 11, 65 ]
 ```
 
-Here, we accomplished the same thing in one line of code by using the `filter` array method, which takes a function and returns a new array that contains only the elements that return true when passed to the function.
+The `filter` array method accomplished the same result in one line of code. It take a function and returns a new array that contains only the elements that return true when passed to the function.
 
-When we say we write "declarative code", we mean that we make use of abstractions to write code that is more streamlined: focused more on _what_ we are trying to accomplish than exactly _how_. Using `filter` allows us to write less "boilerplate" looping code, and instead focus on the core functionality that we want. The code is simpler to read: `for` loops can be used for all sorts of purposes, but whenever you see `filter` you know that the purpose of the looping is to ignore some items in an array.
+"Declarative" code makes use of abstractions to write streamlined code, focused more on _what_ to accomplish _how_. Using `filter` allows you to write less "boilerplate" looping code, and instead focus on the core functionality. The code is more descriptive, too. `for` loops can be used for all sorts of purposes, but whenever you see `filter` you know that the purpose of the looping is to ignore some items in an array.
 
-HTML is a great example of a _declarative_ way of writing: you state _what_ you want the structure to be, not _how_ it should be put together or rendered. Solid makes it easier to write declarative code when working with UIs.
+HTML is a great example of a _declarative_ way of writing: you state _what_ you want the structure to be, not _how_ it should be put together or rendered. Similarly, makes it easier to write declarative code when working with interactive user interfaces.
