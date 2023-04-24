@@ -1,0 +1,36 @@
+---
+import CodeSample from "./CodeSample.astro";
+import { tsToJs, getTscOptions } from "~/utils/compileTS.ts";
+import { readFile } from "node:fs/promises";
+import CodeSnippet from "../CodeSnippet/CodeSnippet.astro";
+import { Code } from "astro/components";
+
+export interface Props {
+  jsTitle?: string;
+  tsTitle?: string;
+  tsPath: string;
+}
+
+const { tsPath, jsTitle, tsTitle } = Astro.props;
+
+const loadedTs = await readFile(tsPath);
+if (!loadedTs) {
+  throw new Error(`Could not load ${tsPath}`);
+}
+const ts = loadedTs.toString();
+
+const js = await tsToJs(tsPath, getTscOptions());
+---
+
+<CodeSample>
+  {
+    js && (
+      <CodeSnippet slot="js" title={jsTitle} code={js}>
+        <Code code={js} lang="js" />
+      </CodeSnippet>
+    )
+  }
+  <CodeSnippet slot="ts" title={jsTitle} code={ts}>
+    <Code code={ts} lang="ts" />
+  </CodeSnippet>
+</CodeSample>

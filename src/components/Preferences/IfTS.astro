@@ -14,7 +14,7 @@ const ts = await Astro.slots.render("default");
 
 <IfTS client:load>
   <span slot="fallback">
-    {code && js ? <code>{js}</code> : js}
+    {code && js ? <code set:html={js} /> : <span set:html={js} />}
   </span>
-  {code && ts ? <code>{ts}</code> : ts}
+  {code && ts ? <code set:html={ts} /> : <span set:html={ts} />}
 </IfTS>
