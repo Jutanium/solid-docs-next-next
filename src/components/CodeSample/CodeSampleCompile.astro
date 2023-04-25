@@ -18,9 +18,9 @@ const loadedTs = await readFile(tsPath);
 if (!loadedTs) {
   throw new Error(`Could not load ${tsPath}`);
 }
-const ts = loadedTs.toString();
 
-const js = await tsToJs(tsPath, getTscOptions());
+const ts = preprocessCode(loadedTs.toString());
+const js = preprocessCode(await tsToJs(tsPath, getTscOptions()));
 ---
 
 <CodeSample>
