@@ -26,8 +26,8 @@ const js = preprocessCode(await tsToJs(tsPath, getTscOptions()));
 <CodeSample>
   {
     js && (
-      <CodeSnippet slot="js" title={jsTitle} code={js}>
-        <Code code={js} lang="js" />
+      <CodeSnippet slot="js" title={jsTitle} code={encodeURIComponent(js)}>
+        <Code code={js} lang="jsx" />
       </CodeSnippet>
     )
   }
