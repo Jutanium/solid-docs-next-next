@@ -80,7 +80,7 @@ function parseTitle(meta: string) {
  * - Trims empty lines at the beginning or end of the code block
  * - Normalizes whitespace and line endings
  */
-function preprocessCode(code: string) {
+export function preprocessCode(code: string) {
   // Split the code into lines and remove any empty lines at the beginning & end
   const lines = code.split(/\r?\n/);
 
