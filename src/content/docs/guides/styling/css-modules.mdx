@@ -1,0 +1,105 @@
+---
+title: CSS Modules
+draft: false
+---
+
+import CodeSample from "~/components/CodeSample/CodeSample.astro"
+
+# CSS Modules
+
+CSS Modules are CSS files in which class names, animations, and media queries are scoped locally by default. CSS modules let you write your styles in CSS but Solid consumes them as Javascript objects. Once bundled class names referenced from CSS module files are given unique names in order to avoid selector name collisions. Another advantage of using CSS modules over normal CSS files is the fact that only selectors referenced are bundled.
+
+Without further a do let's create a CSS module file and how to make use of it in our Solid application.
+
+## Using CSS Modules 
+
+First, let’s start with creating a file named `style.module.css`, in this file you can create styles just like you would in normal CSS files. However, in CSS Module files you won’t be able to make use of element tag names (e.g div, h1, li, a, etc) as they will be regarded as impure selectors in CSS Module files.
+
+__Note__: Module files are not only limited to the `.css` file extension, you can also have `*.module.(scss|sass|css)` file extensions depending on if your project is using a CSS preprocessor.
+
+Let's create a simple CSS module file and see how we can make use of it in our Solid application.
+
+```css 
+/* styles.module.css */
+.foo {
+  color: red;
+}
+.bar {
+  background-color: blue;
+}
+```
+
+Let's create a simple component that makes use of the CSS module styles we just created. 
+
+```jsx
+import styles from './styles.module.css'
+
+export default function App() {
+  return (
+    <div class={styles.bar}>
+      <h1 class={styles.foo}>Hello World</h1>
+    </div>
+  )
+}
+```
+
+You can also make use of CSS modules with CSS class names inline.
+
+```jsx
+import styles from './styles.module.css'
+
+export default function App() {
+  return (
+    <div class={`${styles.bar} ${styles.foo} container`}>
+      <h1>Hello World</h1>
+    </div>
+  )
+}
+```
+
+If you would like to use class names with dashes in them, you can use the bracket notation to access the class name.
+
+```jsx
+import styles from './styles.module.css'
+
+export default function App() {
+  return (
+    <div class={styles['foo-bar']}>
+      <h1>Hello World</h1>
+    </div>
+  )
+}
+```
+
+## CSS Modules with CSS Preprocessors
+
+CSS Modules can be used with CSS preprocessors like Sass and Less. To make use of CSS Modules with CSS preprocessors, you can use the following file extensions:
+
+- `*.module.css` - CSS Modules with PostCSS
+- `*.module.scss` - CSS Modules with Sass
+- `*.module.sass` - CSS Modules with Sass (indented syntax)
+- `*.module.less` - CSS Modules with Less
+
+Here's an example of how to use CSS Modules with Sass.
+
+```scss
+/* styles.module.scss */
+.foo {
+  color: red;
+}
+.bar {
+  background-color: blue;
+}
+```
+
+```jsx
+import styles from './styles.module.scss'
+
+export default function App() {
+  return (
+    <div class={styles.bar}>
+      <h1 class={styles.foo}>Hello World</h1>
+    </div>
+  )
+}
+```
