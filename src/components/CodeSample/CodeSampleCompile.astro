@@ -4,6 +4,7 @@ import { tsToJs, getTscOptions } from "./compileTS.ts";
 import { readFile } from "node:fs/promises";
 import CodeSnippet from "../CodeSnippet/CodeSnippet.astro";
 import { Code } from "astro/components";
+import { preprocessCode } from "integrations/code-snippets.ts";
 
 export interface Props {
   jsTitle?: string;
