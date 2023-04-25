@@ -31,7 +31,7 @@ const js = preprocessCode(await tsToJs(tsPath, getTscOptions()));
       </CodeSnippet>
     )
   }
-  <CodeSnippet slot="ts" title={jsTitle} code={ts}>
-    <Code code={ts} lang="ts" />
+  <CodeSnippet slot="ts" title={tsTitle} code={encodeURIComponent(ts)}>
+    <Code code={ts} lang="tsx" />
   </CodeSnippet>
 </CodeSample>
