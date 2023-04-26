@@ -1,1 +1,1 @@
-# Sshhhh - we're not ready yet! Come back soon!
+# Sshhhh - we're working hard! Come back soon!
