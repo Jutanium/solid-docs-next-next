@@ -19,6 +19,11 @@ export const sidebar: Sidebar = {
     ],
   },
   "Core Concepts": [],
+  "Guides": {
+    Styling: [
+      { text: "CSS Modules", slug: "guides/styling/css-modules" },
+    ]
+  },
   "API Reference": {
     Router: [
       { text: "A", slug: "api/a" },

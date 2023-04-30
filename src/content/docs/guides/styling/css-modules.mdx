@@ -1,0 +1,117 @@
+---
+title: CSS Modules
+draft: false
+---
+
+import CodeSample from "~/components/CodeSample/CodeSample.astro"
+import Aside from '~/components/Aside.astro'
+
+# CSS Modules
+
+CSS modules let you write your styles in CSS files and import them in Solid components as an object of classes. 
+
+```css 
+// App.module.css
+
+.button {
+	border: 1px solid blue;
+}
+
+.container {
+	display: flex;
+}
+```
+
+
+## Using CSS Modules 
+
+First, create a file named `style.module.css`. In this file, you can use CSS normally.
+
+<Aside type="note">
+  Module files are not only limited to the `.css` file extension, you can also have `*.module.(scss|sass|css)` file extensions depending on if your project is using a CSS preprocessor.
+</Aside>
+
+
+```css 
+/* styles.module.css */
+.foo {
+  color: red;
+}
+.bar {
+  background-color: blue;
+}
+```
+
+To use the CSS module styles we just created, import the module in a component.
+
+```jsx
+import styles from './styles.module.css'
+
+export default function App() {
+  return (
+    <div class={styles.bar}>
+      <h1 class={styles.foo}>Hello World</h1>
+    </div>
+  )
+}
+```
+
+You can also make use of CSS modules with CSS class names inline.
+
+```jsx
+import styles from './styles.module.css'
+
+export default function App() {
+  return (
+    <div class={`${styles.bar} ${styles.foo} container`}>
+      <h1>Hello World</h1>
+    </div>
+  )
+}
+```
+
+If you would like to use class names with dashes in them, you can use the bracket notation to access the class name.
+
+```jsx
+import styles from './styles.module.css'
+
+export default function App() {
+  return (
+    <div class={styles['foo-bar']}>
+      <h1>Hello World</h1>
+    </div>
+  )
+}
+```
+
+## CSS Modules with CSS Preprocessors
+
+CSS modules can be used with CSS preprocessors like Sass and Less. To make use of CSS modules with CSS preprocessors, you can use the following file extensions:
+
+- `*.module.css` - CSS modules with PostCSS
+- `*.module.scss` - CSS modules with Sass
+- `*.module.sass` - CSS modules with Sass (indented syntax)
+- `*.module.less` - CSS modules with Less
+
+
+```scss
+/* styles.module.scss */
+.bar {
+  background-color: blue;
+  .foo {
+    color: red;
+  }
+}
+```
+
+```jsx
+import styles from './styles.module.scss'
+
+export default function App() {
+  return (
+    <div class={styles.bar}>
+      <h1 class={styles.foo}>Hello World</h1>
+    </div>
+  )
+}
+```
