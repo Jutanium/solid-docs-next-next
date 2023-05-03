@@ -1,0 +1,43 @@
+---
+title: What is Tracking?
+description: a brief overview of how tracking works in solid.js
+---
+##What is Tracking?
+
+Communication between **primitives** is vital to Solid’s functionality and efficiency 
+versus other JavaScript Frameworks. Without **tracking**, solid’s primitives would 
+not be able to communicate with each other. For example, a **signal** must 
+be updated for an **effect** to execute. How does the effect know when the 
+signal has been updated? 
+
+Imagine, if you will, an air-traffic controller. 
+They must keep a detailed log of flights: when/where they land, take off, etc. Based on 
+that log, they communicate with the flights. Now, imagine instead of flights, 
+we’re talking about signals. Tracking keeps a log of changes in a signal and 
+communicates them to effects. Then, the effect knows to execute.
+
+Tracking enables a signal and an effect to share a relationship. That relationship 
+is called a Publisher/Subscriber pattern. The **publisher** (signal) communicates 
+to the **subscriber** (effect). When a signal’s updating triggers an effect, it can 
+be said that the effect is “subscribed” or a “subscriber” to the signal. When an 
+effect is subscribed to an effect, that subscription is “tracked.”
+
+
+```jsx
+function ToggleElement() 
+  const [showElement, setShowElement] = createSignal(true);
+
+  createEffect(() => {
+    if (showElement()) {
+      console.log('Element is visible');
+      // Perform some side effect when the element is visible
+    } else {
+      console.log('Element is hidden');
+      // Perform some side effect when the element is hidden
+    }
+  
+  });
+
+In this example, the created effect is subscribed to the showElement signal. If the showElement 
+signal is changed, the change will be tracked and the effect function will automatically trigger. 
+This is an example of automatic dependency tracking. 
